@@ -12,6 +12,19 @@
             --secondary-accent: #9370db;
             --text-primary: #f0f0f0;
             --text-secondary: #d8d8d8;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        [data-theme="light"] {
+            --main-bg-color: #f0f0f0;
+            --secondary-bg-color: #ffffff;
+            --primary-accent: #6a0dad;
+            --secondary-accent: #7b68ee;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(106, 13, 173, 0.3);
         }
 
         * {
@@ -22,10 +35,22 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-            color: #f0f0f0;
+            background: var(--main-bg-color);
+            color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         .container {
@@ -36,93 +61,178 @@
 
         .header {
             background: rgba(18, 18, 18, 0.95);
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 2px solid #8a2be2;
+            border-bottom: 2px solid var(--primary-accent);
+            backdrop-filter: blur(10px);
         }
 
         .nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            color: #8a2be2;
-            text-align: center;
+            color: var(--primary-accent);
         }
 
-        .nav-links {
-            display: none;
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: rgba(138, 43, 226, 0.2);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(138, 43, 226, 0.4);
+            transform: scale(1.1);
         }
 
         .hero {
-            padding: 4rem 0;
+            padding: 5rem 0;
             text-align: center;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: #8a2be2;
+            color: var(--primary-accent);
+            text-shadow: 0 2px 10px rgba(138, 43, 226, 0.5);
+            animation: fadeIn 1s ease;
         }
 
         .hero p {
-            font-size: 1.1rem;
-            color: #d8d8d8;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto 2rem;
+            animation: fadeIn 1.5s ease;
         }
 
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
-            background: linear-gradient(45deg, #8a2be2, #9370db);
+            background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: fadeIn 2s ease;
         }
 
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
         }
 
         .features {
-            padding: 3rem 0;
-            background: #121212;
+            padding: 4rem 0;
+            background: var(--secondary-bg-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-accent);
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             margin-top: 2rem;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
         }
 
         .feature-card h3 {
-            color: #8a2be2;
+            color: var(--primary-accent);
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        .countdown {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--main-bg-color) 0%, var(--secondary-bg-color) 100%);
+        }
+
+        .countdown-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-accent);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            min-width: 100px;
+            border: 1px solid var(--border-color);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-accent);
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
         }
 
         .footer {
-            background: #0a0a0a;
+            background: var(--main-bg-color);
             padding: 2rem 0;
             text-align: center;
-            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            border-top: 1px solid var(--border-color);
         }
 
         /* Кнопка управления музыкой */
@@ -161,13 +271,195 @@
             font-size: 20px;
         }
 
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--secondary-bg-color);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-accent);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .settings-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .settings-input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .settings-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .settings-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Уведомления */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary-bg-color);
+            color: var(--text-primary);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--primary-accent);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Мини-игра */
+        .mini-game {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--secondary-bg-color);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 250px;
+            border: 1px solid var(--border-color);
+        }
+
+        .game-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-accent);
+            text-align: center;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+        }
+
+        .game-cell {
+            aspect-ratio: 1;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .game-cell:hover {
+            background: rgba(138, 43, 226, 0.2);
+        }
+
+        .game-cell.x {
+            color: var(--primary-accent);
+        }
+
+        .game-cell.o {
+            color: var(--secondary-accent);
+        }
+
+        .game-status {
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .game-reset {
+            display: block;
+            margin: 0.5rem auto 0;
+            padding: 0.3rem 0.8rem;
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             .logo {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .feature-grid {
@@ -180,21 +472,36 @@
                 width: 40px;
                 height: 40px;
             }
-        }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            .countdown-container {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .mini-game {
+                bottom: 70px;
+                right: 15px;
+                width: 200px;
+            }
         }
     </style>
     <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
-        <!-- ЗАМЕНИТЕ СЛЕДУЮЩУЮ СТРОКУ НА ПУТЬ К ВАШЕМУ ФАЙЛУ В РЕПОЗИТОРИИ -->
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/01/20/audio_dc39bbc811.mp3?filename=ambient-piano-amp-strings-120799.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
@@ -203,34 +510,91 @@
         <i class="fas fa-volume-up"></i>
     </div>
 
+    <!-- Частицы фона -->
+    <div id="particles-js"></div>
+
+    <!-- Мини-игра -->
+    <div class="mini-game" id="miniGame">
+        <div class="game-title">Крестики-нолики</div>
+        <div class="game-grid" id="gameGrid">
+            <div class="game-cell" data-cell-index="0"></div>
+            <div class="game-cell" data-cell-index="1"></div>
+            <div class="game-cell" data-cell-index="2"></div>
+            <div class="game-cell" data-cell-index="3"></div>
+            <div class="game-cell" data-cell-index="4"></div>
+            <div class="game-cell" data-cell-index="5"></div>
+            <div class="game-cell" data-cell-index="6"></div>
+            <div class="game-cell" data-cell-index="7"></div>
+            <div class="game-cell" data-cell-index="8"></div>
+        </div>
+        <div class="game-status" id="gameStatus">Ход: X</div>
+        <button class="game-reset" id="gameReset">Новая игра</button>
+    </div>
+
     <header class="header">
         <nav class="nav container">
             <div class="logo">МойСайт</div>
+            <div class="nav-controls">
+                <button class="control-btn" id="themeToggle" title="Сменить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="control-btn" id="settingsBtn" title="Настройки">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="control-btn" id="notifyBtn" title="Тест уведомления">
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
     <section class="hero">
         <div class="container">
             <h1>Добро пожаловать</h1>
-            <p>Современный сайт с адаптивным дизайном</p>
-            <a href="content.html" class="btn" id="startBtn">Начать</a>
+            <p>Современный сайт с адаптивным дизайном и интерактивными функциями</p>
+            <a href="#features" class="btn" id="startBtn">Начать</a>
         </div>
     </section>
 
-    <section class="features">
+    <section class="features" id="features">
         <div class="container">
+            <h2 class="section-title">Наши возможности</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Функция 1</h3>
-                    <p>Описание первой функции</p>
+                    <h3>Адаптивный дизайн</h3>
+                    <p>Сайт отлично выглядит на любом устройстве - от смартфона до десктопа.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Функция 2</h3>
-                    <p>Описание второй функции</p>
+                    <h3>Интерактивность</h3>
+                    <p>Темная и светлая тема, анимированный фон и другие интерактивные элементы.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Функция 3</h3>
-                    <p>Описание третьей функции</p>
+                    <h3>Музыкальное сопровождение</h3>
+                    <p>Фоновая музыка создает приятную атмосферу для посещения сайта.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="countdown">
+        <div class="container">
+            <h2 class="countdown-title">До нового события осталось:</h2>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">дней</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">часов</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">минут</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">секунд</div>
                 </div>
             </div>
         </div>
@@ -238,268 +602,312 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2024 МойСайт</p>
+            <p>© 2023 МойСайт. Все права защищены.</p>
         </div>
     </footer>
 
-<script>
-// Пароль защита
-document.addEventListener('DOMContentLoaded', function() {
-    // Создаем overlay для ввода пароля
-    const passwordOverlay = document.createElement('div');
-    passwordOverlay.id = 'passwordOverlay';
-    passwordOverlay.style.position = 'fixed';
-    passwordOverlay.style.top = '0';
-    passwordOverlay.style.left = '0';
-    passwordOverlay.style.width = '100%';
-    passwordOverlay.style.height = '100%';
-    passwordOverlay.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%)';
-    passwordOverlay.style.display = 'flex';
-    passwordOverlay.style.justifyContent = 'center';
-    passwordOverlay.style.alignItems = 'center';
-    passwordOverlay.style.zIndex = '9999';
-    passwordOverlay.style.flexDirection = 'column';
-    passwordOverlay.style.gap = '20px';
+    <!-- Модальное окно -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Настройки</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="username">Имя пользователя</label>
+                <input type="text" id="username" class="settings-input" placeholder="Введите ваше имя">
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="musicVolume">Громкость музыки</label>
+                <input type="range" id="musicVolume" class="settings-input" min="0" max="1" step="0.1" value="0.5">
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="eventDate">Дата события</label>
+                <input type="date" id="eventDate" class="settings-input">
+            </div>
+            <button class="settings-btn" id="saveSettings">Сохранить настройки</button>
+        </div>
+    </div>
 
-    // Создаем поле ввода пароля
-    const passwordInput = document.createElement('input');
-    passwordInput.type = 'password';
-    passwordInput.placeholder = 'Введите пароль';
-    passwordInput.style.padding = '15px 20px';
-    passwordInput.style.fontSize = '18px';
-    passwordInput.style.border = '2px solid #8a2be2';
-    passwordInput.style.borderRadius = '8px';
-    passwordInput.style.background = 'rgba(18, 18, 18, 0.9)';
-    passwordInput.style.color = '#f0f0f0';
-    passwordInput.style.outline = 'none';
-    passwordInput.style.width = '300px';
+    <!-- Уведомление -->
+    <div class="notification" id="notification">
+        <div id="notificationMessage">Тестовое уведомление!</div>
+    </div>
 
-    // Создаем кнопку входа
-    const loginButton = document.createElement('button');
-    loginButton.textContent = 'Войти';
-    loginButton.style.padding = '15px 30px';
-    loginButton.style.background = 'linear-gradient(45deg, #8a2be2, #9370db)';
-    loginButton.style.color = 'white';
-    loginButton.style.border = 'none';
-    loginButton.style.borderRadius = '8px';
-    loginButton.style.fontSize = '16px';
-    loginButton.style.fontWeight = 'bold';
-    loginButton.style.cursor = 'pointer';
-    loginButton.style.transition = 'transform 0.3s ease';
+    <script>
+        // Инициализация частиц фона
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#8a2be2" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#9370db",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
 
-    // Сообщение об ошибке
-    const errorMessage = document.createElement('div');
-    errorMessage.style.color = '#ff4444';
-    errorMessage.style.fontSize = '14px';
-    errorMessage.style.display = 'none';
+            // Управление музыкой
+            const music = document.getElementById('backgroundMusic');
+            const musicControl = document.getElementById('musicControl');
+            let isMusicPlaying = false;
 
-    // Добавляем элементы на overlay
-    passwordOverlay.appendChild(passwordInput);
-    passwordOverlay.appendChild(loginButton);
-    passwordOverlay.appendChild(errorMessage);
-
-    // Функция создания индикатора загрузки
-    function createLoadingOverlay() {
-        const loadingOverlay = document.createElement('div');
-        loadingOverlay.id = 'loadingOverlay';
-        loadingOverlay.style.position = 'fixed';
-        loadingOverlay.style.top = '0';
-        loadingOverlay.style.left = '0';
-        loadingOverlay.style.width = '100%';
-        loadingOverlay.style.height = '100%';
-        loadingOverlay.style.background = 'rgba(10, 10, 10, 0.9)';
-        loadingOverlay.style.display = 'flex';
-        loadingOverlay.style.justifyContent = 'center';
-        loadingOverlay.style.alignItems = 'center';
-        loadingOverlay.style.zIndex = '10000';
-        loadingOverlay.style.flexDirection = 'column';
-        loadingOverlay.style.gap = '20px';
-
-        // Создаем спиннер загрузки
-        const spinner = document.createElement('div');
-        spinner.style.width = '50px';
-        spinner.style.height = '50px';
-        spinner.style.border = '4px solid rgba(138, 43, 226, 0.3)';
-        spinner.style.borderRadius = '50%';
-        spinner.style.borderTop = '4px solid #8a2be2';
-        spinner.style.animation = 'spin 1s linear infinite';
-
-        // Текст загрузки
-        const loadingText = document.createElement('div');
-        loadingText.textContent = 'Загрузка...';
-        loadingText.style.color = '#f0f0f0';
-        loadingText.style.fontSize = '18px';
-
-        loadingOverlay.appendChild(spinner);
-        loadingOverlay.appendChild(loadingText);
-
-        return loadingOverlay;
-    }
-
-    // Функция проверки пароля
-    function checkPassword() {
-        if (passwordInput.value === '1080') {
-            // Показываем загрузку
-            const loadingOverlay = createLoadingOverlay();
-            document.body.appendChild(loadingOverlay);
-
-            // Симулируем загрузку 2 секунды
-            setTimeout(() => {
-                document.body.removeChild(loadingOverlay);
-                document.body.removeChild(passwordOverlay);
-                document.body.style.overflow = 'auto';
-                // Восстанавливаем все ссылки после ввода пароля
-                restoreLinks();
-                
-                // Запускаем музыку после ввода пароля
-                try {
-                    const music = document.getElementById('backgroundMusic');
-                    music.volume = 0.5; // Устанавливаем громкость на 50%
-                    music.play().catch(e => {
-                        console.log("Автовоспроизведение заблокировано: ", e);
+            // Попытка автоматического воспроизведения с обработкой ошибок
+            music.volume = 0.5;
+            
+            musicControl.addEventListener('click', function() {
+                if (isMusicPlaying) {
+                    music.pause();
+                    musicControl.classList.add('muted');
+                    musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else {
+                    music.play().catch(error => {
+                        console.log('Автовоспроизведение заблокировано: ', error);
+                        showNotification('Нажмите для воспроизведения музыки');
                     });
-                } catch (e) {
-                    console.error("Ошибка воспроизведения музыки: ", e);
+                    musicControl.classList.remove('muted');
+                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
                 }
-            }, 2000);
-
-        } else {
-            errorMessage.textContent = 'Неверный пароль. Попробуйте снова.';
-            errorMessage.style.display = 'block';
-            passwordInput.value = '';
-            passwordInput.focus();
-        }
-    }
-
-    // Функция для восстановления работы ссылок
-    function restoreLinks() {
-        const startBtn = document.getElementById('startBtn');
-        startBtn.style.pointerEvents = 'auto';
-        startBtn.style.cursor = 'pointer';
-        startBtn.onclick = null;
-    }
-
-    // Блокируем кнопку до ввода пароля
-    function blockButton() {
-        const startBtn = document.getElementById('startBtn');
-        startBtn.style.pointerEvents = 'none';
-        startBtn.style.cursor = 'default';
-        startBtn.onclick = function(e) {
-            e.preventDefault();
-            return false;
-        };
-    }
-
-    // Обработчики событий
-    loginButton.addEventListener('click', checkPassword);
-    
-    passwordInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            checkPassword();
-        }
-    });
-
-    loginButton.addEventListener('mouseenter', function() {
-        loginButton.style.transform = 'translateY(-2px)';
-    });
-
-    loginButton.addEventListener('mouseleave', function() {
-        loginButton.style.transform = 'translateY(0)';
-    });
-
-    // Блокируем прокрутку основного контента
-    document.body.style.overflow = 'hidden';
-    
-    // Блокируем кнопку
-    blockButton();
-    
-    // Добавляем overlay на страницу
-    document.body.appendChild(passwordOverlay);
-    
-    // Фокусируемся на поле ввода
-    passwordInput.focus();
-});
-
-// Обработчик для кнопки "Начать" после разблокировки
-document.getElementById('startBtn').addEventListener('click', function(e) {
-    if (this.style.pointerEvents !== 'none') {
-        e.preventDefault();
-        
-        // Показываем загрузку перед переходом
-        const loadingOverlay = document.createElement('div');
-        loadingOverlay.style.position = 'fixed';
-        loadingOverlay.style.top = '0';
-        loadingOverlay.style.left = '0';
-        loadingOverlay.style.width = '100%';
-        loadingOverlay.style.height = '100%';
-        loadingOverlay.style.background = 'rgba(10, 10, 10, 0.9)';
-        loadingOverlay.style.display = 'flex';
-        loadingOverlay.style.justifyContent = 'center';
-        loadingOverlay.style.alignItems = 'center';
-        loadingOverlay.style.zIndex = '10000';
-        loadingOverlay.style.flexDirection = 'column';
-        loadingOverlay.style.gap = '20px';
-
-        const spinner = document.createElement('div');
-        spinner.style.width = '40px';
-        spinner.style.height = '40px';
-        spinner.style.border = '3px solid rgba(138, 43, 226, 0.3)';
-        spinner.style.borderRadius = '50%';
-        spinner.style.borderTop = '3px solid #8a2be2';
-        spinner.style.animation = 'spin 1s linear infinite';
-
-        const loadingText = document.createElement('div');
-        loadingText.textContent = 'Переходим...';
-        loadingText.style.color = '#f0f0f0';
-        loadingText.style.fontSize = '16px';
-
-        loadingOverlay.appendChild(spinner);
-        loadingOverlay.appendChild(loadingText);
-        document.body.appendChild(loadingOverlay);
-
-        // Задержка 1.5 секунды перед переходом
-        setTimeout(() => {
-            window.location.href = 'content.html';
-        }, 1500);
-    }
-});
-
-// Управление музыкой
-document.addEventListener('DOMContentLoaded', function() {
-    const musicControl = document.getElementById('musicControl');
-    const music = document.getElementById('backgroundMusic');
-    const musicIcon = musicControl.querySelector('i');
-    
-    let isMuted = false;
-    
-    musicControl.addEventListener('click', function() {
-        if (isMuted) {
-            // Включаем музыку
-            music.play().catch(e => {
-                console.log("Ошибка воспроизведения: ", e);
+                isMusicPlaying = !isMusicPlaying;
             });
-            musicIcon.className = 'fas fa-volume-up';
-            musicControl.classList.remove('muted');
-        } else {
-            // Выключаем музыку
-            music.pause();
-            musicIcon.className = 'fas fa-volume-mute';
-            musicControl.classList.add('muted');
-        }
-        
-        isMuted = !isMuted;
-    });
-    
-    // Автозапуск после взаимодействия с пользователем
-    document.body.addEventListener('click', function initMusic() {
-        if (music.paused && !isMuted) {
-            music.play().catch(e => {
-                console.log("Автовоспроизведение заблокировано: ", e);
+
+            // Переключение темы
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                
+                // Сохраняем выбор темы в localStorage
+                localStorage.setItem('theme', newTheme);
+                showNotification(`Тема изменена на ${newTheme === 'dark' ? 'тёмную' : 'светлую'}`);
             });
-        }
-        document.body.removeEventListener('click', initMusic);
-    }, { once: true });
-});
-</script>
+
+            // Проверяем сохраненную тему
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+
+            // Модальное окно
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsModal = document.getElementById('settingsModal');
+            const closeModal = document.getElementById('closeModal');
+            const saveSettings = document.getElementById('saveSettings');
+
+            settingsBtn.addEventListener('click', function() {
+                settingsModal.style.display = 'flex';
+            });
+
+            closeModal.addEventListener('click', function() {
+                settingsModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === settingsModal) {
+                    settingsModal.style.display = 'none';
+                }
+            });
+
+            saveSettings.addEventListener('click', function() {
+                const username = document.getElementById('username').value;
+                const volume = document.getElementById('musicVolume').value;
+                const eventDate = document.getElementById('eventDate').value;
+                
+                if (username) {
+                    localStorage.setItem('username', username);
+                }
+                
+                if (volume) {
+                    music.volume = volume;
+                    localStorage.setItem('volume', volume);
+                }
+                
+                if (eventDate) {
+                    localStorage.setItem('eventDate', eventDate);
+                    setupCountdown();
+                    showNotification('Дата события обновлена!');
+                }
+                
+                settingsModal.style.display = 'none';
+                showNotification('Настройки сохранены!');
+            });
+
+            // Загрузка сохраненных настроек
+            const savedUsername = localStorage.getItem('username');
+            const savedVolume = localStorage.getItem('volume');
+            const savedEventDate = localStorage.getItem('eventDate');
+            
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+            }
+            
+            if (savedVolume) {
+                document.getElementById('musicVolume').value = savedVolume;
+                music.volume = savedVolume;
+            }
+            
+            if (savedEventDate) {
+                document.getElementById('eventDate').value = savedEventDate;
+            }
+
+            // Уведомления
+            const notifyBtn = document.getElementById('notifyBtn');
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notificationMessage');
+
+            function showNotification(message) {
+                notificationMessage.textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+
+            notifyBtn.addEventListener('click', function() {
+                showNotification('Это тестовое уведомление!');
+            });
+
+            // Обратный отсчет
+            function setupCountdown() {
+                const eventDate = new Date(localStorage.getItem('eventDate') || '2024-01-01').getTime();
+                
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const distance = eventDate - now;
+                    
+                    if (distance < 0) {
+                        document.getElementById('days').textContent = '00';
+                        document.getElementById('hours').textContent = '00';
+                        document.getElementById('minutes').textContent = '00';
+                        document.getElementById('seconds').textContent = '00';
+                        return;
+                    }
+                    
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                }
+                
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+            
+            setupCountdown();
+
+            // Мини-игра (крестики-нолики)
+            const gameGrid = document.getElementById('gameGrid');
+            const gameCells = document.querySelectorAll('.game-cell');
+            const gameStatus = document.getElementById('gameStatus');
+            const gameReset = document.getElementById('gameReset');
+            
+            let currentPlayer = 'X';
+            let gameState = ['', '', '', '', '', '', '', '', ''];
+            let gameActive = true;
+            
+            const winningConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+                [0, 4, 8], [2, 4, 6] // diagonals
+            ];
+            
+            function handleCellClick(e) {
+                const clickedCell = e.target;
+                const cellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+                
+                if (gameState[cellIndex] !== '' || !gameActive) return;
+                
+                gameState[cellIndex] = currentPlayer;
+                clickedCell.textContent = currentPlayer;
+                clickedCell.classList.add(currentPlayer.toLowerCase());
+                
+                checkResult();
+            }
+            
+            function checkResult() {
+                let roundWon = false;
+                
+                for (let i = 0; i < winningConditions.length; i++) {
+                    const [a, b, c] = winningConditions[i];
+                    if (gameState[a] === '' || gameState[b] === '' || gameState[c] === '') continue;
+                    
+                    if (gameState[a] === gameState[b] && gameState[b] === gameState[c]) {
+                        roundWon = true;
+                        break;
+                    }
+                }
+                
+                if (roundWon) {
+                    gameStatus.textContent = `Игрок ${currentPlayer} победил!`;
+                    gameActive = false;
+                    showNotification(`Игрок ${currentPlayer} победил в крестики-нолики!`);
+                    return;
+                }
+                
+                const roundDraw = !gameState.includes('');
+                if (roundDraw) {
+                    gameStatus.textContent = 'Ничья!';
+                    gameActive = false;
+                    showNotification('Ничья в крестики-нолики!');
+                    return;
+                }
+                
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                gameStatus.textContent = `Ход: ${currentPlayer}`;
+            }
+            
+            function resetGame() {
+                currentPlayer = 'X';
+                gameState = ['', '', '', '', '', '', '', '', ''];
+                gameActive = true;
+                gameStatus.textContent = `Ход: ${currentPlayer}`;
+                
+                gameCells.forEach(cell => {
+                    cell.textContent = '';
+                    cell.classList.remove('x', 'o');
+                });
+            }
+            
+            gameCells.forEach(cell => cell.addEventListener('click', handleCellClick));
+            gameReset.addEventListener('click', resetGame);
+        });
+    </script>
 </body>
 </html>
