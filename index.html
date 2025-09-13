@@ -151,7 +151,7 @@
         <div class="container">
             <h1>Добро пожаловать</h1>
             <p>Современный сайт с адаптивным дизайном</p>
-            <a href="#" class="btn">Начать</a>
+            <a href="content.html" class="btn" id="startBtn">Начать</a>
         </div>
     </section>
 
@@ -185,6 +185,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Создаем overlay для ввода пароля
     const passwordOverlay = document.createElement('div');
+    passwordOverlay.id = 'passwordOverlay';
     passwordOverlay.style.position = 'fixed';
     passwordOverlay.style.top = '0';
     passwordOverlay.style.left = '0';
@@ -240,12 +241,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if (passwordInput.value === '1080') {
             document.body.removeChild(passwordOverlay);
             document.body.style.overflow = 'auto';
+            // Восстанавливаем все ссылки после ввода пароля
+            restoreLinks();
         } else {
             errorMessage.textContent = 'Неверный пароль. Попробуйте снова.';
             errorMessage.style.display = 'block';
             passwordInput.value = '';
             passwordInput.focus();
         }
+    }
+
+    // Функция для восстановления работы ссылок
+    function restoreLinks() {
+        const startBtn = document.getElementById('startBtn');
+        startBtn.style.pointerEvents = 'auto';
+        startBtn.style.cursor = 'pointer';
+        startBtn.onclick = null;
+    }
+
+    // Блокируем кнопку до ввода пароля
+    function blockButton() {
+        const startBtn = document.getElementById('startBtn');
+        startBtn.style.pointerEvents = 'none';
+        startBtn.style.cursor = 'default';
+        startBtn.onclick = function(e) {
+            e.preventDefault();
+            return false;
+        };
     }
 
     // Обработчики событий
@@ -267,6 +289,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Блокируем прокрутку основного контента
     document.body.style.overflow = 'hidden';
+    
+    // Блокируем кнопку
+    blockButton();
     
     // Добавляем overlay на страницу
     document.body.appendChild(passwordOverlay);
