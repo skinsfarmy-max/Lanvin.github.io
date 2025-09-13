@@ -332,7 +332,7 @@
             border-radius: 5px;
             border: 1px solid var(--border-color);
             background: var(--card-bg);
-            color: var(--text-primary;
+            color: var(--text-primary);
         }
 
         .settings-btn {
@@ -451,7 +451,8 @@
 <body>
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/01/20/audio_dc39bbc811.mp3?filename=ambient-piano-amp-strings-120799.mp3" type="audio/mpeg">
+        <!-- Замените ссылку на прямую ссылку к вашему аудиофайлу в GitHub -->
+        <source src="music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
@@ -766,6 +767,7 @@
                 }, 3000);
             }
 
+            // Исправление: добавлен обработчик события для кнопки уведомлений
             notifyBtn.addEventListener('click', function() {
                 showNotification('Это тестовое уведомление!');
             });
