@@ -407,37 +407,100 @@
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Новые стили для прогресс-бара музыки */
-        .music-progress-container {
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            z-index: 1000;
+        /* Новые стили для новых функций */
+        
+        /* Стили для мини-игры "Угадай число" */
+        .game-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .game-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background: var(--secondary-bg-color);
+            color: var(--text-primary);
+        }
+        
+        .game-feedback {
+            margin: 1rem 0;
+            min-height: 24px;
+            font-weight: bold;
+        }
+        
+        /* Стили для панели быстрых действий */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .quick-action-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .music-progress {
-            height: 100%;
-            background: var(--primary-accent);
-            border-radius: 2px;
-            width: 0%;
-            transition: width 0.1s linear;
+        
+        .quick-action-btn:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
         }
-
-        .music-time {
-            position: fixed;
-            bottom: 90px;
-            left: 230px;
-            font-size: 12px;
+        
+        /* Стили для виджета погоды */
+        .weather-widget {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-accent);
+            margin: 0.5rem 0;
+        }
+        
+        .weather-desc {
             color: var(--text-secondary);
-            z-index: 1000;
+        }
+        
+        /* Стили для цитаты дня */
+        .daily-quote {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--primary-accent);
         }
 
         @media (max-width: 768px) {
@@ -460,17 +523,6 @@
                 height: 40px;
             }
 
-            .music-progress-container {
-                bottom: 65px;
-                left: 15px;
-                width: 150px;
-            }
-
-            .music-time {
-                bottom: 75px;
-                left: 175px;
-            }
-
             .countdown-container {
                 gap: 1rem;
             }
@@ -483,6 +535,16 @@
             .countdown-number {
                 font-size: 2rem;
             }
+            
+            .quick-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .quick-action-btn {
+                width: 100%;
+                max-width: 250px;
+            }
         }
     </style>
     <!-- Font Awesome для иконок -->
@@ -494,7 +556,7 @@
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
         <!-- Замените ссылку на прямую ссылку к вашему аудиофайлу в GitHub -->
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/username/repository/main/music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
@@ -502,12 +564,6 @@
     <div class="music-control" id="musicControl">
         <i class="fas fa-volume-up"></i>
     </div>
-
-    <!-- Прогресс-бар музыки -->
-    <div class="music-progress-container" id="musicProgressContainer">
-        <div class="music-progress" id="musicProgress"></div>
-    </div>
-    <div class="music-time" id="musicTime">0:00 / 0:00</div>
 
     <!-- Частицы фона -->
     <div id="particles-js"></div>
@@ -535,6 +591,20 @@
             <div class="container">
                 <h1>Добро пожаловать</h1>
                 <p>Современный сайт с адаптивным дизайном и интерактивными функциями</p>
+                
+                <!-- Панель быстрых действий -->
+                <div class="quick-actions">
+                    <button class="quick-action-btn" id="quoteBtn">
+                        <i class="fas fa-quote-left"></i> Цитата дня
+                    </button>
+                    <button class="quick-action-btn" id="gameBtn">
+                        <i class="fas fa-gamepad"></i> Мини-игра
+                    </button>
+                    <button class="quick-action-btn" id="weatherBtn">
+                        <i class="fas fa-cloud-sun"></i> Погода
+                    </button>
+                </div>
+                
                 <button class="btn" id="startBtn">Начать</button>
             </div>
         </section>
@@ -555,9 +625,37 @@
                         <h3>Музыкальное сопровождение</h3>
                         <p>Фоновая музыка создает приятную атмосферу для посещения сайта.</p>
                     </div>
+                    <div class="feature-card">
+                        <h3>Новые функции</h3>
+                        <p>Мини-игры, цитаты дня, информация о погоде и многое другое!</p>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- Виджет погоды -->
+        <div class="weather-widget" id="weatherWidget" style="display: none;">
+            <h3><i class="fas fa-cloud-sun"></i> Погода</h3>
+            <div class="weather-temp" id="weatherTemp">--°C</div>
+            <div class="weather-desc" id="weatherDesc">Загрузка...</div>
+            <div id="weatherLocation">Не определено</div>
+        </div>
+
+        <!-- Цитата дня -->
+        <div class="daily-quote" id="dailyQuote" style="display: none;">
+            <div id="quoteText">Загрузка цитаты...</div>
+            <div class="quote-author" id="quoteAuthor"></div>
+        </div>
+
+        <!-- Мини-игра "Угадай число" -->
+        <div class="game-container" id="gameContainer" style="display: none;">
+            <h3><i class="fas fa-gamepad"></i> Угадай число</h3>
+            <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
+            <input type="number" class="game-input" id="gameInput" min="1" max="100" placeholder="Введите число">
+            <button class="btn" id="guessBtn">Угадать</button>
+            <div class="game-feedback" id="gameFeedback"></div>
+            <button class="quick-action-btn" id="restartGame" style="display: none;">Играть снова</button>
+        </div>
 
         <section class="countdown">
             <div class="container">
@@ -671,37 +769,10 @@
             // Управление музыкой
             const music = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
-            const musicProgress = document.getElementById('musicProgress');
-            const musicProgressContainer = document.getElementById('musicProgressContainer');
-            const musicTime = document.getElementById('musicTime');
             let isMusicPlaying = false;
 
             // Установка громкости по умолчанию
             music.volume = 0.5;
-            
-            // Функция форматирования времени
-            function formatTime(seconds) {
-                const min = Math.floor(seconds / 60);
-                const sec = Math.floor(seconds % 60);
-                return `${min}:${sec.toString().padStart(2, '0')}`;
-            }
-            
-            // Обновление прогресс-бара
-            function updateProgress() {
-                if (music.duration) {
-                    const percent = (music.currentTime / music.duration) * 100;
-                    musicProgress.style.width = `${percent}%`;
-                    musicTime.textContent = `${formatTime(music.currentTime)} / ${formatTime(music.duration)}`;
-                }
-            }
-            
-            // Перемотка музыки при клике на прогресс-бар
-            musicProgressContainer.addEventListener('click', function(e) {
-                if (music.duration) {
-                    const clickPosition = e.offsetX / this.offsetWidth;
-                    music.currentTime = clickPosition * music.duration;
-                }
-            });
             
             // Попытка автоматического воспроизведения
             function tryAutoPlay() {
@@ -713,9 +784,6 @@
                         isMusicPlaying = true;
                         musicControl.classList.remove('muted');
                         musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                        
-                        // Запускаем обновление прогресса
-                        setInterval(updateProgress, 500);
                     }).catch(error => {
                         // Автовоспроизведение заблокировано
                         console.log('Автовоспроизведение заблокировано: ', error);
@@ -846,7 +914,6 @@
                 }, 3000);
             }
 
-            // Исправление: добавлен обработчик события для кнопки уведомлений
             notifyBtn.addEventListener('click', function() {
                 const messages = [
                     "Это тестовое уведомление!",
@@ -934,24 +1001,12 @@
                         <li>Добавлена навигация между страницами</li>
                         <li>Исправлена работа фоновой музыки</li>
                         <li>Сохраняется состояние при переключении страниц</li>
-                        <li>Добавлен прогресс-бар для музыки</li>
+                        <li>Добавлены новые функции вместо ползунка прогресса</li>
                         <li>Улучшена система уведомлений</li>
                     </ul>
                 `;
                 
                 contentContainer.innerHTML = demoContent;
-                
-                // В реальном проекте вместо demoContent был бы код:
-                /*
-                fetch('content.html')
-                    .then(response => response.text())
-                    .then(data => {
-                        contentContainer.innerHTML = data;
-                    })
-                    .catch(error => {
-                        contentContainer.innerHTML = '<p>Ошибка загрузки контента: ' + error + '</p>';
-                    });
-                */
             }
 
             // Добавляем обработчик для изменения громкости в реальном времени
@@ -965,16 +1020,6 @@
                 if (e.code === 'Space') {
                     e.preventDefault();
                     musicControl.click();
-                }
-                
-                // Стрелка вправо - перемотка вперед на 10 секунд
-                if (e.code === 'ArrowRight') {
-                    music.currentTime += 10;
-                }
-                
-                // Стрелка влево - перемотка назад на 10 секунд
-                if (e.code === 'ArrowLeft') {
-                    music.currentTime -= 10;
                 }
                 
                 // Стрелка вверх - увеличение громкости
@@ -993,6 +1038,196 @@
                     showNotification(`Громкость: ${Math.round(volume * 100)}%`);
                 }
             });
+
+            // НОВЫЕ ФУНКЦИИ
+            
+            // 1. Мини-игра "Угадай число"
+            const gameContainer = document.getElementById('gameContainer');
+            const gameInput = document.getElementById('gameInput');
+            const guessBtn = document.getElementById('guessBtn');
+            const gameFeedback = document.getElementById('gameFeedback');
+            const restartGame = document.getElementById('restartGame');
+            const gameBtn = document.getElementById('gameBtn');
+            
+            let randomNumber;
+            let attempts;
+            
+            function initGame() {
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                gameFeedback.textContent = '';
+                gameInput.value = '';
+                restartGame.style.display = 'none';
+                gameInput.disabled = false;
+                guessBtn.disabled = false;
+            }
+            
+            gameBtn.addEventListener('click', function() {
+                // Скрываем другие элементы
+                document.getElementById('weatherWidget').style.display = 'none';
+                document.getElementById('dailyQuote').style.display = 'none';
+                
+                // Показываем игру
+                gameContainer.style.display = gameContainer.style.display === 'block' ? 'none' : 'block';
+                
+                if (gameContainer.style.display === 'block') {
+                    initGame();
+                }
+            });
+            
+            guessBtn.addEventListener('click', function() {
+                const userGuess = parseInt(gameInput.value);
+                
+                if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                    gameFeedback.textContent = 'Пожалуйста, введите число от 1 до 100';
+                    gameFeedback.style.color = '#ff4444';
+                    return;
+                }
+                
+                attempts++;
+                
+                if (userGuess === randomNumber) {
+                    gameFeedback.textContent = `Поздравляем! Вы угадали число ${randomNumber} за ${attempts} попыток!`;
+                    gameFeedback.style.color = '#4CAF50';
+                    gameInput.disabled = true;
+                    guessBtn.disabled = true;
+                    restartGame.style.display = 'block';
+                } else if (userGuess < randomNumber) {
+                    gameFeedback.textContent = 'Слишком маленькое число. Попробуйте еще раз!';
+                    gameFeedback.style.color = '#ff9800';
+                } else {
+                    gameFeedback.textContent = 'Слишком большое число. Попробуйте еще раз!';
+                    gameFeedback.style.color = '#ff9800';
+                }
+                
+                gameInput.value = '';
+                gameInput.focus();
+            });
+            
+            restartGame.addEventListener('click', initGame);
+            
+            gameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    guessBtn.click();
+                }
+            });
+            
+            // 2. Цитата дня
+            const quoteBtn = document.getElementById('quoteBtn');
+            const dailyQuote = document.getElementById('dailyQuote');
+            const quoteText = document.getElementById('quoteText');
+            const quoteAuthor = document.getElementById('quoteAuthor');
+            
+            const quotes = [
+                {
+                    text: "Единственный способ делать великие дела — это любить то, что ты делаешь.",
+                    author: "Стив Джобс"
+                },
+                {
+                    text: "Успех — это способность идти от неудачи к неудаче, не теряя энтузиазма.",
+                    author: "Уинстон Черчилль"
+                },
+                {
+                    text: "Будущее принадлежит тем, кто верит в красоту своей мечты.",
+                    author: "Элеонора Рузвельт"
+                },
+                {
+                    text: "Не ждите. Время никогда не будет подходящим.",
+                    author: "Наполеон Хилл"
+                },
+                {
+                    text: "Лучший способ предсказать будущее — создать его.",
+                    author: "Авраам Линкольн"
+                }
+            ];
+            
+            quoteBtn.addEventListener('click', function() {
+                // Скрываем другие элементы
+                document.getElementById('weatherWidget').style.display = 'none';
+                document.getElementById('gameContainer').style.display = 'none';
+                
+                // Показываем цитату
+                dailyQuote.style.display = dailyQuote.style.display === 'block' ? 'none' : 'block';
+                
+                if (dailyQuote.style.display === 'block') {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    quoteText.textContent = randomQuote.text;
+                    quoteAuthor.textContent = randomQuote.author;
+                }
+            });
+            
+            // 3. Виджет погоды
+            const weatherBtn = document.getElementById('weatherBtn');
+            const weatherWidget = document.getElementById('weatherWidget');
+            const weatherTemp = document.getElementById('weatherTemp');
+            const weatherDesc = document.getElementById('weatherDesc');
+            const weatherLocation = document.getElementById('weatherLocation');
+            
+            weatherBtn.addEventListener('click', function() {
+                // Скрываем другие элементы
+                document.getElementById('gameContainer').style.display = 'none';
+                document.getElementById('dailyQuote').style.display = 'none';
+                
+                // Показываем виджет погоды
+                weatherWidget.style.display = weatherWidget.style.display === 'block' ? 'none' : 'block';
+                
+                if (weatherWidget.style.display === 'block') {
+                    getWeather();
+                }
+            });
+            
+            function getWeather() {
+                weatherTemp.textContent = '--°C';
+                weatherDesc.textContent = 'Загрузка...';
+                weatherLocation.textContent = 'Не определено';
+                
+                if (!navigator.geolocation) {
+                    weatherDesc.textContent = 'Геолокация не поддерживается вашим браузером';
+                    return;
+                }
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        
+                        // Используем OpenWeatherMap API для получения погоды
+                        // В реальном проекте нужно заменить на ваш API ключ
+                        const apiKey = 'your_api_key_here'; // Замените на ваш API ключ
+                        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ru`;
+                        
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.cod === 200) {
+                                    weatherTemp.textContent = `${Math.round(data.main.temp)}°C`;
+                                    weatherDesc.textContent = data.weather[0].description;
+                                    weatherLocation.textContent = data.name;
+                                } else {
+                                    weatherDesc.textContent = 'Не удалось получить данные о погоде';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Ошибка получения погоды:', error);
+                                weatherDesc.textContent = 'Ошибка получения данных';
+                                
+                                // Демо-данные для тестирования
+                                weatherTemp.textContent = '24°C';
+                                weatherDesc.textContent = 'ясно';
+                                weatherLocation.textContent = 'Москва';
+                            });
+                    },
+                    function(error) {
+                        console.error('Ошибка геолокации:', error);
+                        weatherDesc.textContent = 'Не удалось определить местоположение';
+                        
+                        // Демо-данные для тестирования
+                        weatherTemp.textContent = '24°C';
+                        weatherDesc.textContent = 'ясно';
+                        weatherLocation.textContent = 'Москва';
+                    }
+                );
+            }
         });
     </script>
 </body>
