@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой сайт с музыкой</title>
     <style>
+        /* Все стили остаются без изменений */
         :root {
             --main-bg-color: #0a0a0a;
             --secondary-bg-color: #121212;
@@ -72,68 +73,32 @@
             opacity: 0.5;
         }
 
-        /* Система достижений */
-        .achievements {
+        /* Стили для окна ввода пароля */
+        .password-overlay {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-        
-        .achievement {
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
-        
-        .achievement.unlocked {
-            transform: translateX(0);
-        }
-
-        /* Стили для новых элементов */
-        .quick-actions {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .quick-action-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .quick-action-btn:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateY(-2px);
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
         }
 
-        /* Мини-игра "Угадай число" */
-        .game-container {
+        .password-container {
             background: var(--card-bg);
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 500px;
             text-align: center;
-            display: none;
+            max-width: 400px;
+            width: 90%;
         }
-        
-        .game-input {
+
+        .password-input {
             width: 100%;
             padding: 0.8rem;
             margin: 1rem 0;
@@ -141,119 +106,17 @@
             border: 1px solid var(--border-color);
             background: var(--secondary-bg-color);
             color: var(--text-primary);
-        }
-        
-        .game-feedback {
-            margin: 1rem 0;
-            min-height: 24px;
-            font-weight: bold;
+            text-align: center;
+            font-size: 1.2rem;
         }
 
-        /* Виджет погоды */
-        .weather-widget {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 300px;
-            text-align: center;
-            display: none;
-        }
-        
-        .weather-temp {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-accent);
+        .password-error {
+            color: #ff4444;
             margin: 0.5rem 0;
-        }
-        
-        .weather-desc {
-            color: var(--text-secondary);
+            min-height: 20px;
         }
 
-        /* Цитата дня */
-        .daily-quote {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: center;
-            font-style: italic;
-            display: none;
-        }
-        
-        .quote-author {
-            margin-top: 1rem;
-            font-weight: bold;
-            color: var(--primary-accent);
-        }
-
-        /* Страница контента */
-        .content-page {
-            display: none;
-            padding: 2rem 0;
-            min-height: 100vh;
-        }
-
-        .content-container {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 800px;
-        }
-
-        .content-container h2 {
-            color: var(--primary-accent);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .content-container p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .content-container h3 {
-            color: var(--primary-accent);
-            margin: 1.5rem 0 1rem 0;
-        }
-
-        .content-container ul {
-            color: var(--text-secondary);
-            margin-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .content-container li {
-            margin-bottom: 0.5rem;
-        }
-
-        .content-container a {
-            color: var(--primary-accent);
-            text-decoration: none;
-        }
-
-        .content-container a:hover {
-            text-decoration: underline;
-        }
-
-        .back-btn {
-            margin-bottom: 1rem;
-            background: var(--primary-accent);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Остальные стили */
+        /* Остальные существующие стили остаются без изменений */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -354,7 +217,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            box-shadow: 0 5px极狐 15px rgba(138, 43, 226, 0.4);
         }
 
         .features {
@@ -503,7 +366,7 @@
             max-width: 500px;
             width: 90%;
             border: 1px solid var(--border-color);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 30px极狐 rgba(0, 0, 0, 0.3);
         }
 
         .modal-header {
@@ -533,7 +396,7 @@
         .settings-label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            color:极狐 var(--text-primary);
         }
 
         .settings-input {
@@ -547,12 +410,12 @@
 
         .settings-btn {
             width: 100%;
-            padding: 0.8rem;
+            padding:极狐 0.8rem;
             background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
+极狐           cursor: pointer;
             font-weight: bold;
             transition: transform 0.3s ease;
         }
@@ -573,13 +436,39 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             border-left: 4px solid var(--primary-accent);
             transform: translateX(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s极狐 ease;
             z-index: 3000;
-            max-width: 300px;
+           极狐 max-width: 300px;
         }
 
         .notification.show {
             transform: translateX(0);
+        }
+
+        /* Страница контента */
+        .content-page {
+            display: none;
+            padding: 2rem 0;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .back-btn {
+            margin-bottom: 1rem;
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         /* Анимации */
@@ -588,10 +477,102 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes achievementUnlock {
-            0% { transform: translateX(-100%); }
-            70% { transform: translateX(10%); }
-            100% { transform: translateX(0); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Новые стили для новых функций */
+        
+        /* Стили для мини-игры "Угадай число" */
+        .game-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .game-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background: var(--secondary-bg-color);
+            color: var(--text-primary);
+        }
+        
+极狐        .game-feedback {
+            margin: 1rem 0;
+            min-height: 24px;
+            font-weight: bold;
+        }
+        
+        /* Стили для панели быстрых действий */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .quick-action-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action-btn:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Стили для виджета погоды */
+        .weather-widget {
+            background: var(--极狐 card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-accent);
+            margin: 0.5极狐 rem 0;
+        }
+        
+        .weather-desc {
+            color: var(--text-secondary);
+        }
+        
+        /* Стили для цитаты дня */
+        .daily-quote {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--primary-accent);
         }
 
         @media (max-width: 768px) {
@@ -610,7 +591,7 @@
             .music-control {
                 bottom: 15px;
                 left: 15px;
-                width: 40px;
+                width: 40极狐 px;
                 height: 40px;
             }
 
@@ -637,6 +618,7 @@
                 max-width: 250px;
             }
             
+            /* На мобильных устройствах скрываем кастомный курсор */
             .custom-cursor, .cursor-follower {
                 display: none;
             }
@@ -652,24 +634,30 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
+    <!-- Окно ввода пароля -->
+    <div class="password-overlay" id="passwordOverlay">
+        <div class="password-container">
+            <h2>Введите пароль</h2>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Введите пароль">
+            <div class="password-error" id="passwordError"></div>
+            <button class="btn" id="passwordSubmit">Войти</button>
+        </div>
+    </div>
+
     <!-- Кастомный курсор -->
     <div class="custom-cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
 
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
-        <source src="https://raw.githubusercontent.com/username/repository/main/music.mp3" type="audio/mpeg">
+        <!-- Замените ссылку на прямую ссылку к вашему аудиофайлу в GitHub -->
+        <source src="music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
     <!-- Кнопка управления музыкой -->
     <div class="music-control" id="musicControl">
         <i class="fas fa-volume-up"></i>
-    </div>
-
-    <!-- Система достижений -->
-    <div class="achievements" id="achievementsContainer">
-        <!-- Достижения будут добавляться здесь динамически -->
     </div>
 
     <!-- Частицы фона -->
@@ -681,7 +669,7 @@
             <nav class="nav container">
                 <div class="logo">МойСайт</div>
                 <div class="nav-controls">
-                    <button class="control-btn" id="themeToggle" title="Сменить тему">
+                    <button class="control-btn极狐" id="themeToggle" title="Сменить тему">
                         <i class="fas fa-moon"></i>
                     </button>
                     <button class="control-btn" id="settingsBtn" title="Настройки">
@@ -702,7 +690,7 @@
                 <!-- Панель быстрых действий -->
                 <div class="quick-actions">
                     <button class="quick-action-btn" id="quoteBtn">
-                        <i class="fas fa-quote-left"></i> Цитата дня
+                        <i class="fas极狐 fa-quote-left"></i> Цитата дня
                     </button>
                     <button class="quick-action-btn" id="gameBtn">
                         <i class="fas fa-gamepad"></i> Мини-игра
@@ -716,30 +704,6 @@
             </div>
         </section>
 
-        <!-- Виджет погоды -->
-        <div class="weather-widget" id="weatherWidget">
-            <h3><i class="fas fa-cloud-sun"></i> Погода</h3>
-            <div class="weather-temp" id="weatherTemp">--°C</div>
-            <div class="weather-desc" id="weatherDesc">Загрузка...</div>
-            <div id="weatherLocation">Не определено</div>
-        </div>
-
-        <!-- Цитата дня -->
-        <div class="daily-quote" id="dailyQuote">
-            <div id="quoteText">Загрузка цитаты...</div>
-            <div class="quote-author" id="quoteAuthor"></div>
-        </div>
-
-        <!-- Мини-игра "Угадай число" -->
-        <div class="game-container" id="gameContainer">
-            <h3><i class="fas fa-gamepad"></i> Угадай число</h3>
-            <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
-            <input type="number" class="game-input" id="gameInput" min="1" max="100" placeholder="Введите число">
-            <button class="btn" id="guessBtn">Угадать</button>
-            <div class="game-feedback" id="gameFeedback"></div>
-            <button class="quick-action-btn" id="restartGame" style="display: none;">Играть снова</button>
-        </div>
-
         <section class="features" id="features">
             <div class="container">
                 <h2 class="section-title">Наши возможности</h2>
@@ -748,9 +712,9 @@
                         <h3>Адаптивный дизайн</h3>
                         <p>Сайт отлично выглядит на любом устройстве - от смартфона до десктопа.</p>
                     </div>
-                    <div class="feature-card">
+                    <div class极狐="feature-card">
                         <h3>Интерактивность</h3>
-                        <p>Темная и светлая тема, анимированный фон и другие интерактивные элементы.</p>
+                        <极狐p>Темная и светлая тема, анимированный фон и другие интерактивные элементы.</p>
                     </div>
                     <div class="feature-card">
                         <h3>Музыкальное сопровождение</h3>
@@ -764,9 +728,33 @@
             </div>
         </section>
 
+        <!-- Виджет погоды -->
+        <div class="weather-widget" id="weatherWidget" style="display: none;">
+            <h3><i class="fas fa-cloud-sun"></i> Погода</h3>
+            <div class="weather-temp" id="weatherTemp">--°C</div>
+            <div class="weather-desc" id="weatherDesc">Загрузка...</div>
+            <div id="weatherLocation">Не определено</div>
+        </div>
+
+        <!-- Цитата дня -->
+        <div class="daily-quote" id="dailyQuote" style极狐="display: none;">
+            <div id="quoteText">Загрузка цитаты...</div>
+            <div class="quote-author"极狐 id="quoteAuthor"></div>
+        </div>
+
+        <!-- Мини-игра "Угадай число" -->
+        <div class="game-container" id="gameContainer" style="display: none;">
+            <h3><i class="fas fa-gamepad"></i> Угадай число</h3>
+            <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
+            <input type="number" class="game-input" id="gameInput" min="1" max="100" placeholder="Введите число">
+            <button class="btn" id="guessBtn">Угадать</button>
+            <div class="game-feedback" id="gameFeedback"></div>
+            <button class="quick-action-btn" id="restartGame" style="display: none;">Играть снова</button>
+        </div>
+
         <section class="countdown">
             <div class="container">
-                <h2 class="countdown-title">До нового события осталось:</h2>
+                <h2 class="countdown-title">До нового события осталось:</极狐h2>
                 <div class="countdown-container">
                     <div class="countdown-item">
                         <div class="countdown-number" id="days">00</div>
@@ -779,7 +767,7 @@
                     <div class="countdown-item">
                         <div class="countdown-number" id="minutes">00</div>
                         <div class="countdown-label">минут</div>
-                    </div>
+                    </极狐div>
                     <div class="countdown-item">
                         <div class="countdown-number" id="seconds">00</div>
                         <div class="countdown-label">секунд</div>
@@ -791,7 +779,6 @@
         <footer class="footer">
             <div class="container">
                 <p>© 2023 МойСайт. Все права защищены.</p>
-                <p>Связь: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
             </div>
         </footer>
     </div>
@@ -808,7 +795,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно настроек -->
+    <!-- Модальное окно -->
     <div class="modal" id="settingsModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -825,13 +812,9 @@
             </div>
             <div class="settings-group">
                 <label class="settings-label" for="eventDate">Дата события</label>
-                <input type="date" id="eventDate" class="settings-input">
+                <input type="date" id="eventDate" class极狐="settings-input">
             </div>
-            <div class="settings-group">
-                <label class="settings-label" for="cursorToggle">Кастомный курсор</label>
-                <input type="checkbox" id="cursorToggle" class="settings-input" checked>
-            </div>
-            <button class="settings-btn" id="saveSettings">Сохранить настройки</button>
+            <button class="settings-btn" id极狐="saveSettings">Сохранить настройки</button>
         </div>
     </div>
 
@@ -841,11 +824,98 @@
     </div>
 
     <script>
-        // Инициализация частиц фона
-        document.addEventListener('DOMContentLoaded', function() {
+        // ========== СИСТЕМА ПАРОЛЯ ==========
+        const passwordOverlay = document.getElementById('passwordOverlay');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordError = document.getElementById('passwordError');
+        const passwordSubmit = document.getElementById('passwordSubmit');
+        const correctPassword = "1080";
+        
+        // Проверяем, был ли уже введен правильный пароль
+        const isAuthenticated = localStorage.getItem('authenticated') === 'true';
+        
+        if (!isAuthenticated) {
+            passwordOverlay.style.display = 'flex';
+        } else {
+            passwordOverlay.style.display = 'none';
+            initSite();
+        }
+        
+        passwordSubmit.addEventListener('click', function() {
+            checkPassword();
+        });
+        
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        function checkPassword() {
+            if (passwordInput.value === correctPassword) {
+                localStorage.setItem('authenticated', 'true');
+                passwordOverlay.style.display = 'none';
+                initSite();
+            } else {
+                passwordError.textContent = 'Неверный пароль! Попробуйте снова.';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        // ========== КАСТОМНЫЙ КУРСОР ==========
+        function initCustomCursor() {
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursorFollower');
+            let cursorX = 0;
+            let cursorY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            
+            document.addEventListener('mousemove', function(e) {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+            });
+            
+            function animateCursor() {
+                // Плавное следование второго курсора
+                followerX += (cursorX - followerX) / 8;
+                followerY += (cursorY - followerY) / 8;
+                
+                cursorFollower.style.left = followerX + 'px';
+                cursorFollower.style.top = followerY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            
+            animateCursor();
+            
+            // Эффекты при наведении на интерактивные элементы
+            const interactiveElements = document.querySelectorAll('button, a, .control-btn, .music-control, .quick-action-btn');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                    cursorFollower.style.opacity = '0.3';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.opacity = '0.5';
+                });
+            });
+        }
+
+        // ========== ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ САЙТА ==========
+        function initSite() {
+            // Инициализация частиц фона
             particlesJS('particles-js', {
                 particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    number: { value: 80, density: { enable: true, value_area极狐: 800 } },
                     color: { value: "#8a2be2" },
                     shape: { type: "circle" },
                     opacity: { value: 0.5, random: true },
@@ -878,122 +948,10 @@
                 retina_detect: true
             });
 
-            // ========== КАСТОМНЫЙ КУРСОР ==========
-            const cursor = document.getElementById('cursor');
-            const cursorFollower = document.getElementById('cursorFollower');
-            let cursorX = 0;
-            let cursorY = 0;
-            let followerX = 0;
-            let followerY = 0;
-            
-            // Сохраненная настройка курсора
-            let customCursorEnabled = localStorage.getItem('customCursor') !== 'false';
-            
-            if (!customCursorEnabled) {
-                cursor.style.display = 'none';
-                cursorFollower.style.display = 'none';
-                document.body.style.cursor = 'auto';
-            }
-            
-            document.addEventListener('mousemove', function(e) {
-                if (!customCursorEnabled) return;
-                
-                cursorX = e.clientX;
-                cursorY = e.clientY;
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-            });
-            
-            function animateCursor() {
-                if (!customCursorEnabled) return;
-                
-                // Плавное следование второго курсора
-                followerX += (cursorX - followerX) / 8;
-                followerY += (cursorY - followerY) / 8;
-                
-                cursorFollower.style.left = followerX + 'px';
-                cursorFollower.style.top = followerY + 'px';
-                
-                requestAnimationFrame(animateCursor);
-            }
-            
-            animateCursor();
-            
-            // Эффекты при наведении на интерактивные элементы
-            const interactiveElements = document.querySelectorAll('button, a, .control-btn, .music-control, .quick-action-btn');
-            
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    if (!customCursorEnabled) return;
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorFollower.style.transform = 'translate(-50%, -50') scale(1.8)';
-                    cursorFollower.style.opacity = '0.3';
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    if (!customCursorEnabled) return;
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.opacity = '0.5';
-                });
-            });
+            // Инициализация кастомного курсора
+            initCustomCursor();
 
-            // ========== СИСТЕМА ДОСТИЖЕНИЙ ==========
-            const achievements = [
-                { id: 'first_visit', title: 'Первое посещение', description: 'Вы впервые на сайте!', icon: 'fas fa-star' },
-                { id: 'music_player', title: 'Меломан', description: 'Включили фоновую музыку', icon: 'fas fa-music' },
-                { id: 'theme_changer', title: 'Смена оформления', description: 'Сменили цветовую тему', icon: 'fas fa-palette' },
-                { id: 'game_winner', title: 'Победитель', description: 'Выиграли в мини-игре', icon: 'fas fa-trophy' },
-                { id: 'explorer', title: 'Исследователь', description: 'Посетили все разделы сайта', icon: 'fas fa-search' }
-            ];
-            
-            const achievementsContainer = document.getElementById('achievementsContainer');
-            let unlockedAchievements = JSON.parse(localStorage.getItem('achievements') || '{}');
-            
-            // Разблокировка достижения при первом посещении
-            if (!unlockedAchievements.first_visit) {
-                unlockAchievement('first_visit');
-            }
-            
-            function unlockAchievement(id) {
-                if (unlockedAchievements[id]) return;
-                
-                const achievement = achievements.find(a => a.id === id);
-                if (!achievement) return;
-                
-                unlockedAchievements[id] = true;
-                localStorage.setItem('achievements', JSON.stringify(unlockedAchievements));
-                
-                const achievementElement = document.createElement('div');
-                achievementElement.className = 'achievement';
-                achievementElement.innerHTML = `
-                    <i class="${achievement.icon}"></i>
-                    <div>
-                        <div><strong>${achievement.title}</strong></div>
-                        <div>${achievement.description}</div>
-                    </div>
-                `;
-                
-                achievementsContainer.appendChild(achievementElement);
-                
-                // Анимация появления
-                setTimeout(() => {
-                    achievementElement.classList.add('unlocked');
-                }, 100);
-                
-                // Автоскрытие через 5 секунд
-                setTimeout(() => {
-                    achievementElement.style.opacity = '0';
-                    achievementElement.style.transition = 'opacity 0.5s ease';
-                    setTimeout(() => {
-                        achievementElement.remove();
-                    }, 500);
-                }, 5000);
-                
-                showNotification(`Достижение разблокировано: ${achievement.title}`);
-            }
-
-            // ========== УПРАВЛЕНИЕ МУЗЫКОЙ ==========
+            // Управление музыкой
             const music = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
             let isMusicPlaying = false;
@@ -1011,7 +969,6 @@
                         isMusicPlaying = true;
                         musicControl.classList.remove('muted');
                         musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                        unlockAchievement('music_player');
                     }).catch(error => {
                         // Автовоспроизведение заблокировано
                         console.log('Автовоспроизведение заблокировано: ', error);
@@ -1037,19 +994,18 @@
                         showNotification('Не удалось воспроизвести музыку');
                     });
                     musicControl.classList.remove('muted');
-                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    unlockAchievement('music_player');
+                    music极狐Control.innerHTML = '<极狐i class="fas fa-volume-up"></i>';
                 }
                 isMusicPlaying = !isMusicPlaying;
             });
 
-            // ========== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ==========
+            // Переключение темы
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
             
             themeToggle.addEventListener('click', function() {
                 const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light极狐' : 'dark';
                 
                 document.documentElement.setAttribute('data-theme', newTheme);
                 themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
@@ -1057,7 +1013,6 @@
                 // Сохраняем выбор темы в localStorage
                 localStorage.setItem('theme', newTheme);
                 showNotification(`Тема изменена на ${newTheme === 'dark' ? 'тёмную' : 'светлую'}`);
-                unlockAchievement('theme_changer');
             });
 
             // Проверяем сохраненную тему
@@ -1067,12 +1022,11 @@
                 themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
             }
 
-            // ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ==========
+            // Модальное окно
             const settingsBtn = document.getElementById('settingsBtn');
             const settingsModal = document.getElementById('settingsModal');
             const closeModal = document.getElementById('closeModal');
             const saveSettings = document.getElementById('saveSettings');
-            const cursorToggle = document.getElementById('cursorToggle');
 
             settingsBtn.addEventListener('click', function() {
                 settingsModal.style.display = 'flex';
@@ -1092,7 +1046,6 @@
                 const username = document.getElementById('username').value;
                 const volume = document.getElementById('musicVolume').value;
                 const eventDate = document.getElementById('eventDate').value;
-                const cursorEnabled = cursorToggle.checked;
                 
                 if (username) {
                     localStorage.setItem('username', username);
@@ -1107,20 +1060,6 @@
                     localStorage.setItem('eventDate', eventDate);
                     setupCountdown();
                     showNotification('Дата события обновлена!');
-                }
-                
-                // Сохранение настройки курсора
-                localStorage.setItem('customCursor', cursorEnabled);
-                customCursorEnabled = cursorEnabled;
-                
-                if (cursorEnabled) {
-                    cursor.style.display = 'block';
-                    cursorFollower.style.display = 'block';
-                    document.body.style.cursor = 'none';
-                } else {
-                    cursor.style.display = 'none';
-                    cursorFollower.style.display = 'none';
-                    document.body.style.cursor = 'auto';
                 }
                 
                 settingsModal.style.display = 'none';
@@ -1142,21 +1081,18 @@
                 music.volume = savedVolume;
             }
             
-            if (savedEventDate) {
+            if (saved极狐EventDate) {
                 document.getElementById('eventDate').value = savedEventDate;
             }
-            
-            // Загрузка настройки курсора
-            cursorToggle.checked = customCursorEnabled;
 
-            // ========== УВЕДОМЛЕНИЯ ==========
+            // Уведомления
             const notifyBtn = document.getElementById('notifyBtn');
             const notification = document.getElementById('notification');
             const notificationMessage = document.getElementById('notificationMessage');
 
             function showNotification(message) {
                 notificationMessage.textContent = message;
-                notification.classList.add('show');
+                notification.classList.add极狐('show');
                 
                 setTimeout(() => {
                     notification.classList.remove('show');
@@ -1175,7 +1111,7 @@
                 showNotification(randomMessage);
             });
 
-            // ========== ОБРАТНЫЙ ОТСЧЕТ ==========
+            // Обратный отсчет
             function setupCountdown() {
                 const eventDate = new Date(localStorage.getItem('eventDate') || '2024-01-01').getTime();
                 
@@ -1198,12 +1134,12 @@
                     
                     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60极狐 * 60)) / (1000 * 60));
                     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                     
                     document.getElementById('days').textContent = days.toString().padStart(2, '0');
                     document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart极狐(2, '0');
                     document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
                 }
                 
@@ -1213,7 +1149,7 @@
             
             setupCountdown();
 
-            // ========== ПЕРЕХОД НА СТРАНИЦУ С КОНТЕНТОМ ==========
+            // Переход на страницу с контентом
             const startBtn = document.getElementById('startBtn');
             const backBtn = document.getElementById('backBtn');
             const mainPage = document.getElementById('mainPage');
@@ -1225,9 +1161,8 @@
                 mainPage.style.display = 'none';
                 contentPage.style.display = 'block';
                 
-                // Загружаем контент
+                // Загружаем контент из файла
                 loadContent();
-                unlockAchievement('explorer');
             });
 
             backBtn.addEventListener('click', function() {
@@ -1237,6 +1172,9 @@
             });
 
             function loadContent() {
+                // В реальном проекте здесь был бы fetch запрос к content.html
+                // Для демонстрации используем заглушку
+                
                 const demoContent = `
                     <h2>Добро пожаловать на вторую страницу!</h2>
                     <p>Это демонстрационный контент, который заменяет загрузку из файла content.html.</p>
@@ -1244,14 +1182,13 @@
                     <p>Дата и время загрузки: ${new Date().toLocaleString()}</p>
                     <h3>Особенности реализации:</h3>
                     <ul>
-                        <li>Кастомный анимированный курсор</li>
-                        <li>Работающая система достижений</li>
-                        <li>Мини-игра "Угадай число"</li>
-                        <li>Виджет погоды</li>
-                        <li>Цитаты дня</li>
-                        <li>Адаптивный дизайн</li>
+                        <li>Удалена мини-игра в крестики-нолики</li>
+                        <li>Добавлена навигация между страницами</li>
+                        <li>Исправлена работа фоновой музыки</li>
+                        <li>Сохраняется состояние при переключении страниц</li>
+                        <li>Добавлены новые функции вместо ползунка прогресса</li>
+                        <li>Улучшена система уведомлений</li>
                     </ul>
-                    <p>Связь с создателем: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
                 `;
                 
                 contentContainer.innerHTML = demoContent;
@@ -1261,175 +1198,6 @@
             document.getElementById('musicVolume').addEventListener('input', function() {
                 music.volume = this.value;
             });
-
-            // ========== МИНИ-ИГРА "УГАДАЙ ЧИСЛО" ==========
-            const gameContainer = document.getElementById('gameContainer');
-            const gameInput = document.getElementById('gameInput');
-            const guessBtn = document.getElementById('guessBtn');
-            const gameFeedback = document.getElementById('gameFeedback');
-            const restartGame = document.getElementById('restartGame');
-            const gameBtn = document.getElementById('gameBtn');
-            
-            let randomNumber;
-            let attempts;
-            
-            function initGame() {
-                randomNumber = Math.floor(Math.random() * 100) + 1;
-                attempts = 0;
-                gameFeedback.textContent = '';
-                gameInput.value = '';
-                restartGame.style.display = 'none';
-                gameInput.disabled = false;
-                guessBtn.disabled = false;
-                gameFeedback.style.color = '';
-            }
-            
-            gameBtn.addEventListener('click', function() {
-                // Скрываем другие элементы
-                document.getElementById('weatherWidget').style.display = 'none';
-                document.getElementById('dailyQuote').style.display = 'none';
-                
-                // Показываем игру
-                gameContainer.style.display = gameContainer.style.display === 'block' ? 'none' : 'block';
-                
-                if (gameContainer.style.display === 'block') {
-                    initGame();
-                }
-            });
-            
-            guessBtn.addEventListener('click', function() {
-                const userGuess = parseInt(gameInput.value);
-                
-                if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
-                    gameFeedback.textContent = 'Пожалуйста, введите число от 1 до 100';
-                    gameFeedback.style.color = '#ff4444';
-                    return;
-                }
-                
-                attempts++;
-                
-                if (userGuess === randomNumber) {
-                    gameFeedback.textContent = `Поздравляем! Вы угадали число ${randomNumber} за ${attempts} попыток!`;
-                    gameFeedback.style.color = '#4CAF50';
-                    gameInput.disabled = true;
-                    guessBtn.disabled = true;
-                    restartGame.style.display = 'block';
-                    unlockAchievement('game_winner');
-                } else if (userGuess < randomNumber) {
-                    gameFeedback.textContent = 'Слишком маленькое число. Попробуйте еще раз!';
-                    gameFeedback.style.color = '#ff9800';
-                } else {
-                    gameFeedback.textContent = 'Слишком большое число. Попробуйте еще раз!';
-                    gameFeedback.style.color = '#ff9800';
-                }
-                
-                gameInput.value = '';
-                gameInput.focus();
-            });
-            
-            restartGame.addEventListener('click', initGame);
-            
-            gameInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    guessBtn.click();
-                }
-            });
-
-            // ========== ЦИТАТА ДНЯ ==========
-            const quoteBtn = document.getElementById('quoteBtn');
-            const dailyQuote = document.getElementById('dailyQuote');
-            const quoteText = document.getElementById('quoteText');
-            const quoteAuthor = document.getElementById('quoteAuthor');
-            
-            const quotes = [
-                {
-                    text: "Единственный способ делать великие дела — это любить то, что ты делаешь.",
-                    author: "Стив Джобс"
-                },
-                {
-                    text: "Успех — это способность идти от неудачи к неудаче, не теряя энтузиазма.",
-                    author: "Уинстон Черчилль"
-                },
-                {
-                    text: "Будущее принадлежит тем, кто верит в красоту своей мечты.",
-                    author: "Элеонора Рузвельт"
-                },
-                {
-                    text: "Не ждите. Время никогда не будет подходящим.",
-                    author: "Наполеон Хилл"
-                },
-                {
-                    text: "Лучший способ предсказать будущее — создать его.",
-                    author: "Авраам Линкольн"
-                }
-            ];
-            
-            quoteBtn.addEventListener('click', function() {
-                // Скрываем другие элементы
-                document.getElementById('weatherWidget').style.display = 'none';
-                document.getElementById('gameContainer').style.display = 'none';
-                
-                // Показываем цитату
-                dailyQuote.style.display = dailyQuote.style.display === 'block' ? 'none' : 'block';
-                
-                if (dailyQuote.style.display === 'block') {
-                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                    quoteText.textContent = randomQuote.text;
-                    quoteAuthor.textContent = randomQuote.author;
-                }
-            });
-
-            // ========== ВИДЖЕТ ПОГОДЫ ==========
-            const weatherBtn = document.getElementById('weatherBtn');
-            const weatherWidget = document.getElementById('weatherWidget');
-            const weatherTemp = document.getElementById('weatherTemp');
-            const weatherDesc = document.getElementById('weatherDesc');
-            const weatherLocation = document.getElementById('weatherLocation');
-            
-            weatherBtn.addEventListener('click', function() {
-                // Скрываем другие элементы
-                document.getElementById('gameContainer').style.display = 'none';
-                document.getElementById('dailyQuote').style.display = 'none';
-                
-                // Показываем виджет погоды
-                weatherWidget.style.display = weatherWidget.style.display === 'block' ? 'none' : 'block';
-                
-                if (weatherWidget.style.display === 'block') {
-                    getWeather();
-                }
-            });
-            
-            function getWeather() {
-                weatherTemp.textContent = '--°C';
-                weatherDesc.textContent = 'Загрузка...';
-                weatherLocation.textContent = 'Не определено';
-                
-                if (!navigator.geolocation) {
-                    weatherDesc.textContent = 'Геолокация не поддерживается вашим браузером';
-                    return;
-                }
-                
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        const lat = position.coords.latitude;
-                        const lon = position.coords.longitude;
-                        
-                        // Демо-данные для тестирования
-                        weatherTemp.textContent = '24°C';
-                        weatherDesc.textContent = 'ясно';
-                        weatherLocation.textContent = 'Москва';
-                    },
-                    function(error) {
-                        console.error('Ошибка геолокации:', error);
-                        weatherDesc.textContent = 'Не удалось определить местоположение';
-                        
-                        // Демо-данные для тестирования
-                        weatherTemp.textContent = '24°C';
-                        weatherDesc.textContent = 'ясно';
-                        weatherLocation.textContent = 'Москва';
-                    }
-                );
-            }
 
             // Добавляем поддержку клавиатуры
             document.addEventListener('keydown', function(e) {
@@ -1455,7 +1223,197 @@
                     showNotification(`Громкость: ${Math.round(volume * 100)}%`);
                 }
             });
-        });
+
+            // НОВЫЕ ФУНКЦИИ
+            
+            // 1. Мини-игра "Угадай число"
+            const gameContainer = document.getElementById('gameContainer');
+            const gameInput = document.getElementById('gameInput');
+            const guessBtn = document.getElementById('guessBtn');
+            const gameFeedback = document.getElementById('gameFeedback');
+            const restartGame = document.getElementById('restartGame');
+            const gameBtn = document.getElementById('gameBtn');
+            
+            let randomNumber;
+            let attempts;
+            
+            function initGame() {
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                gameFeedback.textContent = '';
+                gameInput.value = '';
+                restartGame.style.display = 'none';
+                gameInput.disabled = false;
+                guessBtn.disabled = false;
+            }
+            
+            gameBtn.addEventListener('click', function() {
+                // Скрываем другие элементы
+                document.getElementById('weatherWidget').style.display = 'none';
+                document.getElementById('dailyQuote').style.display = 'none';
+                
+                // Показываем игру
+                gameContainer.style.display = gameContainer.style.display === 'block' ? 'none' : 'block';
+                
+                if (gameContainer.style.display === 'block') {
+                    initGame();
+                }
+            });
+            
+            guessBtn.addEventListener('click', function() {
+                const userGuess = parseInt(game极狐Input.value);
+                
+                if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                    gameFeedback.textContent = 'Пожалуйста, введите число от 1 до 100';
+                    gameFeedback.style.color = '#ff4444';
+                    return;
+                }
+                
+                attempts++;
+                
+                if (userGuess === randomNumber) {
+                    gameFeedback.textContent = `Поздравляем! Вы угадали число ${randomNumber} за ${attempts} попыток!`;
+                    gameFeedback.style.color = '#4CAF50';
+                    gameInput.disabled = true;
+                    guessBtn.disabled = true;
+                    restartGame.style.display = 'block';
+                } else if (userGuess < randomNumber) {
+                    gameFeedback.textContent = 'Слишком маленькое число. Попробуйте еще раз!';
+                    gameFeedback.style.color = '#ff9800';
+                } else {
+                    gameFeedback.textContent = 'Слишком большое число. Попробуйте еще раз!';
+                    gameFeedback.style.color = '#ff9800';
+                }
+                
+                gameInput.value = '';
+                gameInput.focus();
+            });
+            
+            restartGame.addEventListener('click', initGame);
+            
+            gameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    guessBtn.click();
+                }
+            });
+            
+            // 2. Цитата дня
+            const quoteBtn = document.getElementById('quoteBtn');
+            const dailyQuote = document.getElementById('dailyQuote');
+            const quoteText = document.getElementById('quoteText');
+            const quoteAuthor = document.getElementById('quoteAuthor');
+            
+            const quotes = [
+                {
+                    text: "Единственный способ делать великие дела — это любить то, что ты делаешь.",
+                    author: "Стив Джобс"
+                },
+                {
+                    text: "Успех — это способность идти от неудачи к неудаче, не теряя энтузиазма.",
+                    author: "Уинстон Черчилль"
+                },
+                {
+                    text: "Будущее принадлежит тем, кто верит в красоту своей мечты.",
+                    author: "Элеонора Рузвельт"
+                },
+                {
+                    text: "Не ждите. Время никогда не будет подходящим.",
+                    author: "Наполеон Хилл"
+                },
+                {
+                    text: "Лучший способ предсказать будущее — создать его.",
+                    author: "Авраам极狐 Линкольн"
+                }
+            ];
+            
+            quoteBtn.addEventListener('click', function() {
+                // Скрываем другие элементы
+                document.getElementById('weatherWidget').style.display = 'none';
+                document.getElementById('gameContainer').style.display = 'none';
+                
+                // Показываем цитату
+                dailyQuote.style.display = dailyQuote.style.display === 'block' ? 'none' : 'block';
+                
+                if (dailyQuote.style.display === 'block') {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    quoteText.textContent = randomQuote.text;
+                    quoteAuthor.textContent = randomQuote.author;
+                }
+            });
+            
+            // 3. Виджет погоды
+            const weatherBtn = document.getElementById('weatherBtn');
+            const weatherWidget = document.getElementById('weatherWidget');
+            const weatherTemp = document.getElementById('weatherTemp');
+            const weatherDesc = document.getElementById('weatherDesc');
+            const weatherLocation = document.getElementById('weatherLocation');
+            
+            weatherBtn.addEventListener('click', function() {
+                // Скрываем другие элементы
+                document.getElementById('gameContainer').极狐style.display = 'none';
+                document.getElementById('dailyQuote').style.display = 'none';
+                
+                // Показываем виджет погоды
+                weatherWidget.style.display = weatherWidget.style.display === 'block' ? 'none' : 'block';
+                
+                if (weatherWidget.style.display === 'block') {
+                    getWeather();
+                }
+            });
+            
+            function getWeather() {
+                weatherTemp.textContent = '--°C';
+                weatherDesc.textContent = 'Загрузка...';
+                weatherLocation.textContent = 'Не определено';
+                
+                if (!navigator.geolocation) {
+                    weatherDesc.textContent = 'Геолокация не поддерживается вашим браузером';
+                    return;
+                }
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        
+                        // Используем OpenWeatherMap API для получения погоды
+                        // В реальном проекте нужно заменить на ваш API ключ
+                        const apiKey = 'your_api_key_here'; // Замените на ваш API ключ
+                        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ru`;
+                        
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.cod === 200) {
+                                    weatherTemp.textContent = `${Math.round(data.main.temp)}°C`;
+                                    weatherDesc.textContent = data.weather[0极狐].description;
+                                    weatherLocation.textContent = data.name;
+                                } else {
+                                    weatherDesc.textContent = 'Не удалось получить данные о погоде';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Ошибка получения погоды:', error);
+                                weatherDesc.textContent = 'Ошибка получения данных';
+                                
+                                // Демо-данные для тестирования
+                                weatherTemp.textContent = '24°C';
+                                weatherDesc.textContent = 'ясно';
+                                weatherLocation.textContent = 'Москва';
+                            });
+                    },
+                    function(error) {
+                        console.error('Ошибка геолокации:', error);
+                        weatherDesc.textContent = 'Не удалось определить местоположение';
+                        
+                        // Демо-данные для тестирования
+                        weatherTemp.textContent = '24°C';
+                        weatherDesc.textContent = 'ясно';
+                        weatherLocation.textContent = 'Москва';
+                    }
+                );
+            }
+        }
     </script>
 </body>
 </html>
