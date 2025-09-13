@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой сайт с музыкой</title>
     <style>
+        /* Все стили остаются без изменений */
         :root {
             --main-bg-color: #0a0a0a;
             --secondary-bg-color: #121212;
@@ -409,6 +410,36 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Новые стили для прогресс-бара музыки */
+        .music-progress-container {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .music-progress {
+            height: 100%;
+            background: var(--primary-accent);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .music-time {
+            position: fixed;
+            bottom: 90px;
+            left: 230px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            z-index: 1000;
+        }
+
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.8rem;
@@ -427,6 +458,17 @@
                 left: 15px;
                 width: 40px;
                 height: 40px;
+            }
+
+            .music-progress-container {
+                bottom: 65px;
+                left: 15px;
+                width: 150px;
+            }
+
+            .music-time {
+                bottom: 75px;
+                left: 175px;
             }
 
             .countdown-container {
@@ -452,7 +494,7 @@
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
         <!-- Замените ссылку на прямую ссылку к вашему аудиофайлу в GitHub -->
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/username/repository/main/music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
@@ -460,6 +502,12 @@
     <div class="music-control" id="musicControl">
         <i class="fas fa-volume-up"></i>
     </div>
+
+    <!-- Прогресс-бар музыки -->
+    <div class="music-progress-container" id="musicProgressContainer">
+        <div class="music-progress" id="musicProgress"></div>
+    </div>
+    <div class="music-time" id="musicTime">0:00 / 0:00</div>
 
     <!-- Частицы фона -->
     <div id="particles-js"></div>
@@ -623,10 +671,37 @@
             // Управление музыкой
             const music = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
+            const musicProgress = document.getElementById('musicProgress');
+            const musicProgressContainer = document.getElementById('musicProgressContainer');
+            const musicTime = document.getElementById('musicTime');
             let isMusicPlaying = false;
 
             // Установка громкости по умолчанию
             music.volume = 0.5;
+            
+            // Функция форматирования времени
+            function formatTime(seconds) {
+                const min = Math.floor(seconds / 60);
+                const sec = Math.floor(seconds % 60);
+                return `${min}:${sec.toString().padStart(2, '0')}`;
+            }
+            
+            // Обновление прогресс-бара
+            function updateProgress() {
+                if (music.duration) {
+                    const percent = (music.currentTime / music.duration) * 100;
+                    musicProgress.style.width = `${percent}%`;
+                    musicTime.textContent = `${formatTime(music.currentTime)} / ${formatTime(music.duration)}`;
+                }
+            }
+            
+            // Перемотка музыки при клике на прогресс-бар
+            musicProgressContainer.addEventListener('click', function(e) {
+                if (music.duration) {
+                    const clickPosition = e.offsetX / this.offsetWidth;
+                    music.currentTime = clickPosition * music.duration;
+                }
+            });
             
             // Попытка автоматического воспроизведения
             function tryAutoPlay() {
@@ -638,6 +713,9 @@
                         isMusicPlaying = true;
                         musicControl.classList.remove('muted');
                         musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        
+                        // Запускаем обновление прогресса
+                        setInterval(updateProgress, 500);
                     }).catch(error => {
                         // Автовоспроизведение заблокировано
                         console.log('Автовоспроизведение заблокировано: ', error);
@@ -742,6 +820,7 @@
             
             if (savedUsername) {
                 document.getElementById('username').value = savedUsername;
+                document.title = `${savedUsername} - МойСайт`;
             }
             
             if (savedVolume) {
@@ -769,7 +848,15 @@
 
             // Исправление: добавлен обработчик события для кнопки уведомлений
             notifyBtn.addEventListener('click', function() {
-                showNotification('Это тестовое уведомление!');
+                const messages = [
+                    "Это тестовое уведомление!",
+                    "Уведомление работает отлично!",
+                    "Настройки сохранены успешно!",
+                    "Добро пожаловать на сайт!",
+                    "Музыкальное сопровождение включено"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                showNotification(randomMessage);
             });
 
             // Обратный отсчет
@@ -785,6 +872,11 @@
                         document.getElementById('hours').textContent = '00';
                         document.getElementById('minutes').textContent = '00';
                         document.getElementById('seconds').textContent = '00';
+                        
+                        // Показываем уведомление, когда отсчет завершен
+                        if (distance > -1000 && distance > -5000) {
+                            showNotification('Событие началось!');
+                        }
                         return;
                     }
                     
@@ -842,6 +934,8 @@
                         <li>Добавлена навигация между страницами</li>
                         <li>Исправлена работа фоновой музыки</li>
                         <li>Сохраняется состояние при переключении страниц</li>
+                        <li>Добавлен прогресс-бар для музыки</li>
+                        <li>Улучшена система уведомлений</li>
                     </ul>
                 `;
                 
@@ -859,6 +953,46 @@
                     });
                 */
             }
+
+            // Добавляем обработчик для изменения громкости в реальном времени
+            document.getElementById('musicVolume').addEventListener('input', function() {
+                music.volume = this.value;
+            });
+
+            // Добавляем поддержку клавиатуры
+            document.addEventListener('keydown', function(e) {
+                // Пробел - пауза/воспроизведение
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    musicControl.click();
+                }
+                
+                // Стрелка вправо - перемотка вперед на 10 секунд
+                if (e.code === 'ArrowRight') {
+                    music.currentTime += 10;
+                }
+                
+                // Стрелка влево - перемотка назад на 10 секунд
+                if (e.code === 'ArrowLeft') {
+                    music.currentTime -= 10;
+                }
+                
+                // Стрелка вверх - увеличение громкости
+                if (e.code === 'ArrowUp') {
+                    const volume = Math.min(1, music.volume + 0.1);
+                    music.volume = volume;
+                    document.getElementById('musicVolume').value = volume;
+                    showNotification(`Громкость: ${Math.round(volume * 100)}%`);
+                }
+                
+                // Стрелка вниз - уменьшение громкости
+                if (e.code === 'ArrowDown') {
+                    const volume = Math.max(0, music.volume - 0.1);
+                    music.volume = volume;
+                    document.getElementById('musicVolume').value = volume;
+                    showNotification(`Громкость: ${Math.round(volume * 100)}%`);
+                }
+            });
         });
     </script>
 </body>
