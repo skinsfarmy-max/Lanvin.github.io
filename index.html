@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой сайт с музыкой</title>
     <style>
+        /* Все стили остаются без изменений */
         :root {
             --main-bg-color: #0a0a0a;
             --secondary-bg-color: #121212;
@@ -42,156 +43,8 @@
             transition: background-color 0.3s, color 0.3s;
             position: relative;
             overflow-x: hidden;
-            cursor: none; /* Для кастомного курсора */
         }
 
-        /* Стиль кастомного курсора */
-        .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-accent);
-            mix-blend-mode: difference;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--primary-accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            opacity: 0.5;
-        }
-
-        /* Система достижений */
-        .achievements {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-        
-        .achievement {
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
-        
-        .achievement.unlocked {
-            transform: translateX(0);
-        }
-
-        /* Стили для новых элементов */
-        .quick-actions {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .quick-action-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .quick-action-btn:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Мини-игра "Угадай число" */
-        .game-container {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 500px;
-            text-align: center;
-            display: none;
-        }
-        
-        .game-input {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            background: var(--secondary-bg-color);
-            color: var(--text-primary);
-        }
-        
-        .game-feedback {
-            margin: 1rem 0;
-            min-height: 24px;
-            font-weight: bold;
-        }
-
-        /* Виджет погоды */
-        .weather-widget {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 300px;
-            text-align: center;
-            display: none;
-        }
-        
-        .weather-temp {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-accent);
-            margin: 0.5rem 0;
-        }
-        
-        .weather-desc {
-            color: var(--text-secondary);
-        }
-
-        /* Цитата дня */
-        .daily-quote {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: center;
-            font-style: italic;
-            display: none;
-        }
-        
-        .quote-author {
-            margin-top: 1rem;
-            font-weight: bold;
-            color: var(--primary-accent);
-        }
-
-        /* Остальные стили */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -520,16 +373,134 @@
             transform: translateX(0);
         }
 
+        /* Страница контента */
+        .content-page {
+            display: none;
+            padding: 2rem 0;
+            min-height: 100vh;
+        }
+
+        .content-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .back-btn {
+            margin-bottom: 1rem;
+            background: var(--primary-accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         /* Анимации */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes achievementUnlock {
-            0% { transform: translateX(-100%); }
-            70% { transform: translateX(10%); }
-            100% { transform: translateX(0); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Новые стили для новых функций */
+        
+        /* Стили для мини-игры "Угадай число" */
+        .game-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .game-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background: var(--secondary-bg-color);
+            color: var(--text-primary);
+        }
+        
+        .game-feedback {
+            margin: 1rem 0;
+            min-height: 24px;
+            font-weight: bold;
+        }
+        
+        /* Стили для панели быстрых действий */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .quick-action-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action-btn:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Стили для виджета погоды */
+        .weather-widget {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-accent);
+            margin: 0.5rem 0;
+        }
+        
+        .weather-desc {
+            color: var(--text-secondary);
+        }
+        
+        /* Стили для цитаты дня */
+        .daily-quote {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--primary-accent);
         }
 
         @media (max-width: 768px) {
@@ -574,14 +545,6 @@
                 width: 100%;
                 max-width: 250px;
             }
-            
-            .custom-cursor, .cursor-follower {
-                display: none;
-            }
-            
-            body {
-                cursor: auto;
-            }
         }
     </style>
     <!-- Font Awesome для иконок -->
@@ -590,12 +553,9 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <!-- Кастомный курсор -->
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursorFollower"></div>
-
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
+        <!-- Замените ссылку на прямую ссылку к вашему аудиофайлу в GitHub -->
         <source src="music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
@@ -603,11 +563,6 @@
     <!-- Кнопка управления музыкой -->
     <div class="music-control" id="musicControl">
         <i class="fas fa-volume-up"></i>
-    </div>
-
-    <!-- Система достижений -->
-    <div class="achievements" id="achievementsContainer">
-        <!-- Достижения будут добавляться здесь динамически -->
     </div>
 
     <!-- Частицы фона -->
@@ -654,30 +609,6 @@
             </div>
         </section>
 
-        <!-- Виджет погоды -->
-        <div class="weather-widget" id="weatherWidget">
-            <h3><i class="fas fa-cloud-sun"></i> Погода</h3>
-            <div class="weather-temp" id="weatherTemp">--°C</div>
-            <div class="weather-desc" id="weatherDesc">Загрузка...</div>
-            <div id="weatherLocation">Не определено</div>
-        </div>
-
-        <!-- Цитата дня -->
-        <div class="daily-quote" id="dailyQuote">
-            <div id="quoteText">Загрузка цитаты...</div>
-            <div class="quote-author" id="quoteAuthor"></div>
-        </div>
-
-        <!-- Мини-игра "Угадай число" -->
-        <div class="game-container" id="gameContainer">
-            <h3><i class="fas fa-gamepad"></i> Угадай число</h3>
-            <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
-            <input type="number" class="game-input" id="gameInput" min="1" max="100" placeholder="Введите число">
-            <button class="btn" id="guessBtn">Угадать</button>
-            <div class="game-feedback" id="gameFeedback"></div>
-            <button class="quick-action-btn" id="restartGame" style="display: none;">Играть снова</button>
-        </div>
-
         <section class="features" id="features">
             <div class="container">
                 <h2 class="section-title">Наши возможности</h2>
@@ -701,6 +632,30 @@
                 </div>
             </div>
         </section>
+
+        <!-- Виджет погоды -->
+        <div class="weather-widget" id="weatherWidget" style="display: none;">
+            <h3><i class="fas fa-cloud-sun"></i> Погода</h3>
+            <div class="weather-temp" id="weatherTemp">--°C</div>
+            <div class="weather-desc" id="weatherDesc">Загрузка...</div>
+            <div id="weatherLocation">Не определено</div>
+        </div>
+
+        <!-- Цитата дня -->
+        <div class="daily-quote" id="dailyQuote" style="display: none;">
+            <div id="quoteText">Загрузка цитаты...</div>
+            <div class="quote-author" id="quoteAuthor"></div>
+        </div>
+
+        <!-- Мини-игра "Угадай число" -->
+        <div class="game-container" id="gameContainer" style="display: none;">
+            <h3><i class="fas fa-gamepad"></i> Угадай число</h3>
+            <p>Я загадал число от 1 до 100. Попробуй угадать!</p>
+            <input type="number" class="game-input" id="gameInput" min="1" max="100" placeholder="Введите число">
+            <button class="btn" id="guessBtn">Угадать</button>
+            <div class="game-feedback" id="gameFeedback"></div>
+            <button class="quick-action-btn" id="restartGame" style="display: none;">Играть снова</button>
+        </div>
 
         <section class="countdown">
             <div class="container">
@@ -729,7 +684,6 @@
         <footer class="footer">
             <div class="container">
                 <p>© 2023 МойСайт. Все права защищены.</p>
-                <p>Связь: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
             </div>
         </footer>
     </div>
@@ -746,7 +700,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно настроек -->
+    <!-- Модальное окно -->
     <div class="modal" id="settingsModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -764,10 +718,6 @@
             <div class="settings-group">
                 <label class="settings-label" for="eventDate">Дата события</label>
                 <input type="date" id="eventDate" class="settings-input">
-            </div>
-            <div class="settings-group">
-                <label class="settings-label" for="cursorToggle">Кастомный курсор</label>
-                <input type="checkbox" id="cursorToggle" class="settings-input" checked>
             </div>
             <button class="settings-btn" id="saveSettings">Сохранить настройки</button>
         </div>
@@ -816,122 +766,7 @@
                 retina_detect: true
             });
 
-            // ========== КАСТОМНЫЙ КУРСОР ==========
-            const cursor = document.getElementById('cursor');
-            const cursorFollower = document.getElementById('cursorFollower');
-            let cursorX = 0;
-            let cursorY = 0;
-            let followerX = 0;
-            let followerY = 0;
-            
-            // Сохраненная настройка курсора
-            let customCursorEnabled = localStorage.getItem('customCursor') !== 'false';
-            
-            if (!customCursorEnabled) {
-                cursor.style.display = 'none';
-                cursorFollower.style.display = 'none';
-                document.body.style.cursor = 'auto';
-            }
-            
-            document.addEventListener('mousemove', function(e) {
-                if (!customCursorEnabled) return;
-                
-                cursorX = e.clientX;
-                cursorY = e.clientY;
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-            });
-            
-            function animateCursor() {
-                if (!customCursorEnabled) return;
-                
-                // Плавное следование второго курсора
-                followerX += (cursorX - followerX) / 8;
-                followerY += (cursorY - followerY) / 8;
-                
-                cursorFollower.style.left = followerX + 'px';
-                cursorFollower.style.top = followerY + 'px';
-                
-                requestAnimationFrame(animateCursor);
-            }
-            
-            animateCursor();
-            
-            // Эффекты при наведении на интерактивные элементы
-            const interactiveElements = document.querySelectorAll('button, a, .control-btn, .music-control, .quick-action-btn');
-            
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    if (!customCursorEnabled) return;
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.8)';
-                    cursorFollower.style.opacity = '0.3';
-                });
-                
-                el.addEventListener('mouseleave', () => {
-                    if (!customCursorEnabled) return;
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.opacity = '0.5';
-                });
-            });
-
-            // ========== СИСТЕМА ДОСТИЖЕНИЙ ==========
-            const achievements = [
-                { id: 'first_visit', title: 'Первое посещение', description: 'Вы впервые на сайте!', icon: 'fas fa-star' },
-                { id: 'music_player', title: 'Меломан', description: 'Включили фоновую музыку', icon: 'fas fa-music' },
-                { id: 'theme_changer', title: 'Смена оформления', description: 'Сменили цветовую тему', icon: 'fas fa-palette' },
-                { id: 'game_winner', title: 'Победитель', description: 'Выиграли в мини-игре', icon: 'fas fa-trophy' },
-                { id: 'explorer', title: 'Исследователь', description: 'Посетили все разделы сайта', icon: 'fas fa-search' }
-            ];
-            
-            const achievementsContainer = document.getElementById('achievementsContainer');
-            let unlockedAchievements = JSON.parse(localStorage.getItem('achievements') || '{}');
-            
-            // Разблокировка достижения при первом посещении
-            if (!unlockedAchievements.first_visit) {
-                unlockAchievement('first_visit');
-            }
-            
-            function unlockAchievement(id) {
-                if (unlockedAchievements[id]) return;
-                
-                const achievement = achievements.find(a => a.id === id);
-                if (!achievement) return;
-                
-                unlockedAchievements[id] = true;
-                localStorage.setItem('achievements', JSON.stringify(unlockedAchievements));
-                
-                const achievementElement = document.createElement('div');
-                achievementElement.className = 'achievement';
-                achievementElement.innerHTML = `
-                    <i class="${achievement.icon}"></i>
-                    <div>
-                        <div><strong>${achievement.title}</strong></div>
-                        <div>${achievement.description}</div>
-                    </div>
-                `;
-                
-                achievementsContainer.appendChild(achievementElement);
-                
-                // Анимация появления
-                setTimeout(() => {
-                    achievementElement.classList.add('unlocked');
-                }, 100);
-                
-                // Автоскрытие через 5 секунд
-                setTimeout(() => {
-                    achievementElement.style.opacity = '0';
-                    achievementElement.style.transition = 'opacity 0.5s ease';
-                    setTimeout(() => {
-                        achievementElement.remove();
-                    }, 500);
-                }, 5000);
-                
-                showNotification(`Достижение разблокировано: ${achievement.title}`);
-            }
-
-            // ========== УПРАВЛЕНИЕ МУЗЫКОЙ ==========
+            // Управление музыкой
             const music = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
             let isMusicPlaying = false;
@@ -949,7 +784,6 @@
                         isMusicPlaying = true;
                         musicControl.classList.remove('muted');
                         musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                        unlockAchievement('music_player');
                     }).catch(error => {
                         // Автовоспроизведение заблокировано
                         console.log('Автовоспроизведение заблокировано: ', error);
@@ -976,12 +810,11 @@
                     });
                     musicControl.classList.remove('muted');
                     musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    unlockAchievement('music_player');
                 }
                 isMusicPlaying = !isMusicPlaying;
             });
 
-            // ========== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ==========
+            // Переключение темы
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
             
@@ -995,7 +828,6 @@
                 // Сохраняем выбор темы в localStorage
                 localStorage.setItem('theme', newTheme);
                 showNotification(`Тема изменена на ${newTheme === 'dark' ? 'тёмную' : 'светлую'}`);
-                unlockAchievement('theme_changer');
             });
 
             // Проверяем сохраненную тему
@@ -1005,12 +837,11 @@
                 themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
             }
 
-            // ========== МОДАЛЬНОЕ ОКНО НАСТРОЕК ==========
+            // Модальное окно
             const settingsBtn = document.getElementById('settingsBtn');
             const settingsModal = document.getElementById('settingsModal');
             const closeModal = document.getElementById('closeModal');
             const saveSettings = document.getElementById('saveSettings');
-            const cursorToggle = document.getElementById('cursorToggle');
 
             settingsBtn.addEventListener('click', function() {
                 settingsModal.style.display = 'flex';
@@ -1030,7 +861,6 @@
                 const username = document.getElementById('username').value;
                 const volume = document.getElementById('musicVolume').value;
                 const eventDate = document.getElementById('eventDate').value;
-                const cursorEnabled = cursorToggle.checked;
                 
                 if (username) {
                     localStorage.setItem('username', username);
@@ -1045,20 +875,6 @@
                     localStorage.setItem('eventDate', eventDate);
                     setupCountdown();
                     showNotification('Дата события обновлена!');
-                }
-                
-                // Сохранение настройки курсора
-                localStorage.setItem('customCursor', cursorEnabled);
-                customCursorEnabled = cursorEnabled;
-                
-                if (cursorEnabled) {
-                    cursor.style.display = 'block';
-                    cursorFollower.style.display = 'block';
-                    document.body.style.cursor = 'none';
-                } else {
-                    cursor.style.display = 'none';
-                    cursorFollower.style.display = 'none';
-                    document.body.style.cursor = 'auto';
                 }
                 
                 settingsModal.style.display = 'none';
@@ -1083,11 +899,8 @@
             if (savedEventDate) {
                 document.getElementById('eventDate').value = savedEventDate;
             }
-            
-            // Загрузка настройки курсора
-            cursorToggle.checked = customCursorEnabled;
 
-            // ========== УВЕДОМЛЕНИЯ ==========
+            // Уведомления
             const notifyBtn = document.getElementById('notifyBtn');
             const notification = document.getElementById('notification');
             const notificationMessage = document.getElementById('notificationMessage');
@@ -1113,7 +926,7 @@
                 showNotification(randomMessage);
             });
 
-            // ========== ОБРАТНЫЙ ОТСЧЕТ ==========
+            // Обратный отсчет
             function setupCountdown() {
                 const eventDate = new Date(localStorage.getItem('eventDate') || '2024-01-01').getTime();
                 
@@ -1151,7 +964,7 @@
             
             setupCountdown();
 
-            // ========== ПЕРЕХОД НА СТРАНИЦУ С КОНТЕНТОМ ==========
+            // Переход на страницу с контентом
             const startBtn = document.getElementById('startBtn');
             const backBtn = document.getElementById('backBtn');
             const mainPage = document.getElementById('mainPage');
@@ -1163,9 +976,8 @@
                 mainPage.style.display = 'none';
                 contentPage.style.display = 'block';
                 
-                // Загружаем контент
+                // Загружаем контент из файла
                 loadContent();
-                unlockAchievement('explorer');
             });
 
             backBtn.addEventListener('click', function() {
@@ -1175,19 +987,23 @@
             });
 
             function loadContent() {
+                // В реальном проекте здесь был бы fetch запрос к content.html
+                // Для демонстрации используем заглушку
+                
                 const demoContent = `
                     <h2>Добро пожаловать на вторую страницу!</h2>
-                    <p>Это демонстрационный контент.</p>
+                    <p>Это демонстрационный контент, который заменяет загрузку из файла content.html.</p>
+                    <p>В реальном проекте здесь будет загружаться содержимое из внешнего файла.</p>
                     <p>Дата и время загрузки: ${new Date().toLocaleString()}</p>
                     <h3>Особенности реализации:</h3>
                     <ul>
-                        <li>Кастомный анимированный курсор</li>
-                        <li>Работающая система достижений</li>
-                        <li>Мини-игра "Угадай число"</li>
-                        <li>Виджет погоды</li>
-                        <li>Цитаты дня</li>
+                        <li>Удалена мини-игра в крестики-нолики</li>
+                        <li>Добавлена навигация между страницами</li>
+                        <li>Исправлена работа фоновой музыки</li>
+                        <li>Сохраняется состояние при переключении страниц</li>
+                        <li>Добавлены новые функции вместо ползунка прогресса</li>
+                        <li>Улучшена система уведомлений</li>
                     </ul>
-                    <p>Связь с создателем: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
                 `;
                 
                 contentContainer.innerHTML = demoContent;
@@ -1198,7 +1014,34 @@
                 music.volume = this.value;
             });
 
-            // ========== МИНИ-ИГРА "УГАДАЙ ЧИСЛО" ==========
+            // Добавляем поддержку клавиатуры
+            document.addEventListener('keydown', function(e) {
+                // Пробел - пауза/воспроизведение
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    musicControl.click();
+                }
+                
+                // Стрелка вверх - увеличение громкости
+                if (e.code === 'ArrowUp') {
+                    const volume = Math.min(1, music.volume + 0.1);
+                    music.volume = volume;
+                    document.getElementById('musicVolume').value = volume;
+                    showNotification(`Громкость: ${Math.round(volume * 100)}%`);
+                }
+                
+                // Стрелка вниз - уменьшение громкости
+                if (e.code === 'ArrowDown') {
+                    const volume = Math.max(0, music.volume - 0.1);
+                    music.volume = volume;
+                    document.getElementById('musicVolume').value = volume;
+                    showNotification(`Громкость: ${Math.round(volume * 100)}%`);
+                }
+            });
+
+            // НОВЫЕ ФУНКЦИИ
+            
+            // 1. Мини-игра "Угадай число"
             const gameContainer = document.getElementById('gameContainer');
             const gameInput = document.getElementById('gameInput');
             const guessBtn = document.getElementById('guessBtn');
@@ -1217,7 +1060,6 @@
                 restartGame.style.display = 'none';
                 gameInput.disabled = false;
                 guessBtn.disabled = false;
-                gameFeedback.style.color = '';
             }
             
             gameBtn.addEventListener('click', function() {
@@ -1250,7 +1092,6 @@
                     gameInput.disabled = true;
                     guessBtn.disabled = true;
                     restartGame.style.display = 'block';
-                    unlockAchievement('game_winner');
                 } else if (userGuess < randomNumber) {
                     gameFeedback.textContent = 'Слишком маленькое число. Попробуйте еще раз!';
                     gameFeedback.style.color = '#ff9800';
@@ -1270,8 +1111,8 @@
                     guessBtn.click();
                 }
             });
-
-            // ========== ЦИТАТА ДНЯ ==========
+            
+            // 2. Цитата дня
             const quoteBtn = document.getElementById('quoteBtn');
             const dailyQuote = document.getElementById('dailyQuote');
             const quoteText = document.getElementById('quoteText');
@@ -1314,8 +1155,8 @@
                     quoteAuthor.textContent = randomQuote.author;
                 }
             });
-
-            // ========== ВИДЖЕТ ПОГОДЫ ==========
+            
+            // 3. Виджет погоды
             const weatherBtn = document.getElementById('weatherBtn');
             const weatherWidget = document.getElementById('weatherWidget');
             const weatherTemp = document.getElementById('weatherTemp');
@@ -1350,10 +1191,31 @@
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
                         
-                        // Демо-данные для тестирования
-                        weatherTemp.textContent = '24°C';
-                        weatherDesc.textContent = 'ясно';
-                        weatherLocation.textContent = 'Москва';
+                        // Используем OpenWeatherMap API для получения погоды
+                        // В реальном проекте нужно заменить на ваш API ключ
+                        const apiKey = 'your_api_key_here'; // Замените на ваш API ключ
+                        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=ru`;
+                        
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.cod === 200) {
+                                    weatherTemp.textContent = `${Math.round(data.main.temp)}°C`;
+                                    weatherDesc.textContent = data.weather[0].description;
+                                    weatherLocation.textContent = data.name;
+                                } else {
+                                    weatherDesc.textContent = 'Не удалось получить данные о погоде';
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Ошибка получения погоды:', error);
+                                weatherDesc.textContent = 'Ошибка получения данных';
+                                
+                                // Демо-данные для тестирования
+                                weatherTemp.textContent = '24°C';
+                                weatherDesc.textContent = 'ясно';
+                                weatherLocation.textContent = 'Москва';
+                            });
                     },
                     function(error) {
                         console.error('Ошибка геолокации:', error);
@@ -1366,31 +1228,6 @@
                     }
                 );
             }
-
-            // Добавляем поддержку клавиатуры
-            document.addEventListener('keydown', function(e) {
-                // Пробел - пауза/воспроизведение
-                if (e.code === 'Space') {
-                    e.preventDefault();
-                    musicControl.click();
-                }
-                
-                // Стрелка вверх - увеличение громкости
-                if (e.code === 'ArrowUp') {
-                    const volume = Math.min(1, music.volume + 0.1);
-                    music.volume = volume;
-                    document.getElementById('musicVolume').value = volume;
-                    showNotification(`Громкость: ${Math.round(volume * 100)}%`);
-                }
-                
-                // Стрелка вниз - уменьшение громкости
-                if (e.code === 'ArrowDown') {
-                    const volume = Math.max(0, music.volume - 0.1);
-                    music.volume = volume;
-                    document.getElementById('musicVolume').value = volume;
-                    showNotification(`Громкость: ${Math.round(volume * 100)}%`);
-                }
-            });
         });
     </script>
 </body>
