@@ -179,5 +179,101 @@
             <p>© 2024 МойСайт</p>
         </div>
     </footer>
+
+<script>
+// Пароль защита
+document.addEventListener('DOMContentLoaded', function() {
+    // Создаем overlay для ввода пароля
+    const passwordOverlay = document.createElement('div');
+    passwordOverlay.style.position = 'fixed';
+    passwordOverlay.style.top = '0';
+    passwordOverlay.style.left = '0';
+    passwordOverlay.style.width = '100%';
+    passwordOverlay.style.height = '100%';
+    passwordOverlay.style.background = 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%)';
+    passwordOverlay.style.display = 'flex';
+    passwordOverlay.style.justifyContent = 'center';
+    passwordOverlay.style.alignItems = 'center';
+    passwordOverlay.style.zIndex = '9999';
+    passwordOverlay.style.flexDirection = 'column';
+    passwordOverlay.style.gap = '20px';
+
+    // Создаем поле ввода пароля
+    const passwordInput = document.createElement('input');
+    passwordInput.type = 'password';
+    passwordInput.placeholder = 'Введите пароль';
+    passwordInput.style.padding = '15px 20px';
+    passwordInput.style.fontSize = '18px';
+    passwordInput.style.border = '2px solid #8a2be2';
+    passwordInput.style.borderRadius = '8px';
+    passwordInput.style.background = 'rgba(18, 18, 18, 0.9)';
+    passwordInput.style.color = '#f0f0f0';
+    passwordInput.style.outline = 'none';
+    passwordInput.style.width = '300px';
+
+    // Создаем кнопку входа
+    const loginButton = document.createElement('button');
+    loginButton.textContent = 'Войти';
+    loginButton.style.padding = '15px 30px';
+    loginButton.style.background = 'linear-gradient(45deg, #8a2be2, #9370db)';
+    loginButton.style.color = 'white';
+    loginButton.style.border = 'none';
+    loginButton.style.borderRadius = '8px';
+    loginButton.style.fontSize = '16px';
+    loginButton.style.fontWeight = 'bold';
+    loginButton.style.cursor = 'pointer';
+    loginButton.style.transition = 'transform 0.3s ease';
+
+    // Сообщение об ошибке
+    const errorMessage = document.createElement('div');
+    errorMessage.style.color = '#ff4444';
+    errorMessage.style.fontSize = '14px';
+    errorMessage.style.display = 'none';
+
+    // Добавляем элементы на overlay
+    passwordOverlay.appendChild(passwordInput);
+    passwordOverlay.appendChild(loginButton);
+    passwordOverlay.appendChild(errorMessage);
+
+    // Функция проверки пароля
+    function checkPassword() {
+        if (passwordInput.value === '1080') {
+            document.body.removeChild(passwordOverlay);
+            document.body.style.overflow = 'auto';
+        } else {
+            errorMessage.textContent = 'Неверный пароль. Попробуйте снова.';
+            errorMessage.style.display = 'block';
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
+    }
+
+    // Обработчики событий
+    loginButton.addEventListener('click', checkPassword);
+    
+    passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+
+    loginButton.addEventListener('mouseenter', function() {
+        loginButton.style.transform = 'translateY(-2px)';
+    });
+
+    loginButton.addEventListener('mouseleave', function() {
+        loginButton.style.transform = 'translateY(0)';
+    });
+
+    // Блокируем прокрутку основного контента
+    document.body.style.overflow = 'hidden';
+    
+    // Добавляем overlay на страницу
+    document.body.appendChild(passwordOverlay);
+    
+    // Фокусируемся на поле ввода
+    passwordInput.focus();
+});
+</script>
 </body>
 </html>
