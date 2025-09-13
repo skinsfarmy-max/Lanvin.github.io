@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой сайт с музыкой</title>
     <style>
-        /* Все стили остаются без изменений */
+        /* Все предыдущие стили остаются */
         :root {
             --main-bg-color: #0a0a0a;
             --secondary-bg-color: #121212;
@@ -43,8 +43,253 @@
             transition: background-color 0.3s, color 0.3s;
             position: relative;
             overflow-x: hidden;
+            cursor: none; /* Для кастомного курсора */
         }
 
+        /* Стиль кастомного курсора */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-accent);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0.5;
+        }
+
+        /* Стили для новых элементов */
+        
+        /* Виджет Telegram */
+        .telegram-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #0088cc;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
+        }
+        
+        /* Анимированная визитка */
+        .user-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .user-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        .username {
+            font-size: 1.8rem;
+            color: var(--primary-accent);
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+        
+        /* Генератор градиентов */
+        .gradient-generator {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .gradient-preview {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+        }
+        
+        /* Виртуальное пианино */
+        .piano-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .piano {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            height: 150px;
+        }
+        
+        .piano-key {
+            width: 40px;
+            height: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.1s;
+        }
+        
+        .piano-key.black {
+            width: 25px;
+            height: 60%;
+            background: black;
+            margin-left: -12.5px;
+            margin-right: -12.5px;
+            z-index: 2;
+            border-radius: 0 0 3px 3px;
+        }
+        
+        .piano-key:hover {
+            background: #eee;
+        }
+        
+        .piano-key.black:hover {
+            background: #333;
+        }
+        
+        .piano-key.active {
+            background: var(--primary-accent);
+        }
+        
+        .piano-key.black.active {
+            background: var(--secondary-accent);
+        }
+        
+        /* Система достижений */
+        .achievements {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .achievement {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .achievement.unlocked {
+            transform: translateX(0);
+        }
+        
+        /* Кнопки с эффектом частиц */
+        .particle-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+        
+        /* Анимация для достижений */
+        @keyframes achievementUnlock {
+            0% { transform: translateX(-100%); }
+            70% { transform: translateX(10%); }
+            100% { transform: translateX(0); }
+        }
+        
+        /* Адаптивность для новых элементов */
+        @media (max-width: 768px) {
+            .telegram-widget {
+                bottom: 80px;
+                right: 15px;
+                font-size: 0.9rem;
+                padding: 10px 14px;
+            }
+            
+            .user-card {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+            
+            .username {
+                font-size: 1.5rem;
+            }
+            
+            .piano {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 1rem;
+            }
+            
+            .custom-cursor, .cursor-follower {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* Остальные стили из предыдущей версии остаются без изменений */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -410,99 +655,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Новые стили для новых функций */
-        
-        /* Стили для мини-игры "Угадай число" */
-        .game-container {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 500px;
-            text-align: center;
-        }
-        
-        .game-input {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            background: var(--secondary-bg-color);
-            color: var(--text-primary);
-        }
-        
-        .game-feedback {
-            margin: 1rem 0;
-            min-height: 24px;
-            font-weight: bold;
-        }
-        
-        /* Стили для панели быстрых действий */
-        .quick-actions {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .quick-action-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .quick-action-btn:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateY(-2px);
-        }
-        
-        /* Стили для виджета погоды */
-        .weather-widget {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 300px;
-            text-align: center;
-        }
-        
-        .weather-temp {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-accent);
-            margin: 0.5rem 0;
-        }
-        
-        .weather-desc {
-            color: var(--text-secondary);
-        }
-        
-        /* Стили для цитаты дня */
-        .daily-quote {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: center;
-            font-style: italic;
-        }
-        
-        .quote-author {
-            margin-top: 1rem;
-            font-weight: bold;
-            color: var(--primary-accent);
-        }
-
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.8rem;
@@ -553,16 +705,31 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
+    <!-- Кастомный курсор -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
     <!-- Аудио элемент -->
     <audio id="backgroundMusic" loop>
         <!-- Замените ссылку на прямую ссылку к вашему аудиофайлу в GitHub -->
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/username/repository/main/music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
     <!-- Кнопка управления музыкой -->
     <div class="music-control" id="musicControl">
         <i class="fas fa-volume-up"></i>
+    </div>
+
+    <!-- Виджет Telegram -->
+    <div class="telegram-widget" id="telegramWidget">
+        <i class="fab fa-telegram"></i>
+        <span>@HEEEEEEEEEEEEEEEEEEEEEEEET</span>
+    </div>
+
+    <!-- Система достижений -->
+    <div class="achievements" id="achievementsContainer">
+        <!-- Достижения будут добавляться здесь динамически -->
     </div>
 
     <!-- Частицы фона -->
@@ -583,6 +750,9 @@
                     <button class="control-btn" id="notifyBtn" title="Тест уведомления">
                         <i class="fas fa-bell"></i>
                     </button>
+                    <button class="control-btn" id="aboutBtn" title="Обо мне">
+                        <i class="fas fa-user"></i>
+                    </button>
                 </div>
             </nav>
         </header>
@@ -592,46 +762,52 @@
                 <h1>Добро пожаловать</h1>
                 <p>Современный сайт с адаптивным дизайном и интерактивными функциями</p>
                 
+                <!-- Анимированная визитка с username -->
+                <div class="user-card">
+                    <div class="username">@HEEEEEEEEEEEEEEEEEEEEEEEET</div>
+                    <p>Telegram: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
+                    <p>Создатель этого крутого сайта</p>
+                </div>
+                
                 <!-- Панель быстрых действий -->
                 <div class="quick-actions">
-                    <button class="quick-action-btn" id="quoteBtn">
+                    <button class="btn particle-btn" id="quoteBtn">
                         <i class="fas fa-quote-left"></i> Цитата дня
                     </button>
-                    <button class="quick-action-btn" id="gameBtn">
+                    <button class="btn particle-btn" id="gameBtn">
                         <i class="fas fa-gamepad"></i> Мини-игра
                     </button>
-                    <button class="quick-action-btn" id="weatherBtn">
+                    <button class="btn particle-btn" id="weatherBtn">
                         <i class="fas fa-cloud-sun"></i> Погода
+                    </button>
+                    <button class="btn particle-btn" id="pianoBtn">
+                        <i class="fas fa-music"></i> Пианино
+                    </button>
+                    <button class="btn particle-btn" id="gradientBtn">
+                        <i class="fas fa-palette"></i> Градиенты
                     </button>
                 </div>
                 
-                <button class="btn" id="startBtn">Начать</button>
+                <button class="btn particle-btn" id="startBtn">Начать</button>
             </div>
         </section>
 
-        <section class="features" id="features">
-            <div class="container">
-                <h2 class="section-title">Наши возможности</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>Адаптивный дизайн</h3>
-                        <p>Сайт отлично выглядит на любом устройстве - от смартфона до десктопа.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Интерактивность</h3>
-                        <p>Темная и светлая тема, анимированный фон и другие интерактивные элементы.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Музыкальное сопровождение</h3>
-                        <p>Фоновая музыка создает приятную атмосферу для посещения сайта.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Новые функции</h3>
-                        <p>Мини-игры, цитаты дня, информация о погоде и многое другое!</p>
-                    </div>
-                </div>
+        <!-- Генератор градиентов -->
+        <div class="gradient-generator" id="gradientGenerator" style="display: none;">
+            <h3><i class="fas fa-palette"></i> Генератор градиентов</h3>
+            <div class="gradient-preview" id="gradientPreview"></div>
+            <button class="btn" id="generateGradientBtn">Сгенерировать</button>
+            <button class="btn" id="applyGradientBtn">Применить к сайту</button>
+        </div>
+
+        <!-- Виртуальное пианино -->
+        <div class="piano-container" id="pianoContainer" style="display: none;">
+            <h3><i class="fas fa-music"></i> Виртуальное пианино</h3>
+            <p>Нажмите на клавиши или используйте клавиши A-S-D-F-G-H-J для игры</p>
+            <div class="piano" id="piano">
+                <!-- Клавиши будут добавлены через JS -->
             </div>
-        </section>
+        </div>
 
         <!-- Виджет погоды -->
         <div class="weather-widget" id="weatherWidget" style="display: none;">
@@ -684,6 +860,7 @@
         <footer class="footer">
             <div class="container">
                 <p>© 2023 МойСайт. Все права защищены.</p>
+                <p>Связь: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
             </div>
         </footer>
     </div>
@@ -700,7 +877,27 @@
         </div>
     </div>
 
-    <!-- Модальное окно -->
+    <!-- Модальное окно "О себе" -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Обо мне</h3>
+                <button class="close-modal" id="closeAboutModal">&times;</button>
+            </div>
+            <div class="settings-group">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div class="username" style="font-size: 1.5rem;">@HEEEEEEEEEEEEEEEEEEEEEEEET</div>
+                    <p>Создатель этого интерактивного сайта</p>
+                </div>
+                <p><i class="fab fa-telegram" style="color: #0088cc;"></i> Telegram: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
+                <p>Этот сайт был создан для демонстрации современных веб-технологий и интерактивных элементов.</p>
+                <p>Здесь вы найдете множество интересных функций, включая мини-игры, генератор градиентов, виртуальное пианино и многое другое!</p>
+            </div>
+            <button class="settings-btn" id="closeAboutBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно настроек -->
     <div class="modal" id="settingsModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -718,6 +915,10 @@
             <div class="settings-group">
                 <label class="settings-label" for="eventDate">Дата события</label>
                 <input type="date" id="eventDate" class="settings-input">
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="cursorToggle">Кастомный курсор</label>
+                <input type="checkbox" id="cursorToggle" class="settings-input" checked>
             </div>
             <button class="settings-btn" id="saveSettings">Сохранить настройки</button>
         </div>
@@ -766,6 +967,371 @@
                 retina_detect: true
             });
 
+            // ========== КАСТОМНЫЙ КУРСОР ==========
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursorFollower');
+            let cursorX = 0;
+            let cursorY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            
+            // Сохраненная настройка курсора
+            let customCursorEnabled = localStorage.getItem('customCursor') !== 'false';
+            
+            if (!customCursorEnabled) {
+                cursor.style.display = 'none';
+                cursorFollower.style.display = 'none';
+                document.body.style.cursor = 'auto';
+            }
+            
+            document.addEventListener('mousemove', function(e) {
+                if (!customCursorEnabled) return;
+                
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+            });
+            
+            function animateCursor() {
+                if (!customCursorEnabled) return;
+                
+                // Плавное следование второго курсора
+                followerX += (cursorX - followerX) / 8;
+                followerY += (cursorY - followerY) / 8;
+                
+                cursorFollower.style.left = followerX + 'px';
+                cursorFollower.style.top = followerY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            
+            animateCursor();
+            
+            // Эффекты при наведении на интерактивные элементы
+            const interactiveElements = document.querySelectorAll('button, a, .control-btn, .music-control, .telegram-widget');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (!customCursorEnabled) return;
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                    cursorFollower.style.opacity = '0.3';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    if (!customCursorEnabled) return;
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorFollower.style.opacity = '0.5';
+                });
+            });
+
+            // ========== СИСТЕМА ДОСТИЖЕНИЙ ==========
+            const achievements = [
+                { id: 'first_visit', title: 'Первое посещение', description: 'Вы впервые на сайте!', icon: 'fas fa-star' },
+                { id: 'music_player', title: 'Меломан', description: 'Включили фоновую музыку', icon: 'fas fa-music' },
+                { id: 'theme_changer', title: 'Смена оформления', description: 'Сменили цветовую тему', icon: 'fas fa-palette' },
+                { id: 'game_winner', title: 'Победитель', description: 'Выиграли в мини-игре', icon: 'fas fa-trophy' },
+                { id: 'piano_player', title: 'Виртуоз', description: 'Сыграли на виртуальном пианино', icon: 'fas fa-music' },
+                { id: 'explorer', title: 'Исследователь', description: 'Нашли все Easter Eggs', icon: 'fas fa-search' }
+            ];
+            
+            const achievementsContainer = document.getElementById('achievementsContainer');
+            let unlockedAchievements = JSON.parse(localStorage.getItem('achievements') || '{}');
+            
+            // Разблокировка достижения при первом посещении
+            if (!unlockedAchievements.first_visit) {
+                unlockAchievement('first_visit');
+            }
+            
+            function unlockAchievement(id) {
+                if (unlockedAchievements[id]) return;
+                
+                const achievement = achievements.find(a => a.id === id);
+                if (!achievement) return;
+                
+                unlockedAchievements[id] = true;
+                localStorage.setItem('achievements', JSON.stringify(unlockedAchievements));
+                
+                const achievementElement = document.createElement('div');
+                achievementElement.className = 'achievement';
+                achievementElement.innerHTML = `
+                    <i class="${achievement.icon}"></i>
+                    <div>
+                        <div><strong>${achievement.title}</strong></div>
+                        <div>${achievement.description}</div>
+                    </div>
+                `;
+                
+                achievementsContainer.appendChild(achievementElement);
+                
+                // Анимация появления
+                setTimeout(() => {
+                    achievementElement.classList.add('unlocked');
+                }, 100);
+                
+                // Автоскрытие через 5 секунд
+                setTimeout(() => {
+                    achievementElement.style.opacity = '0';
+                    achievementElement.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        achievementElement.remove();
+                    }, 500);
+                }, 5000);
+                
+                showNotification(`Достижение разблокировано: ${achievement.title}`);
+            }
+
+            // ========== ЭФФЕКТ ЧАСТИЦ ДЛЯ КНОПОК ==========
+            const particleButtons = document.querySelectorAll('.particle-btn');
+            
+            particleButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!customCursorEnabled) return;
+                    
+                    const particles = [];
+                    const particleCount = 15;
+                    
+                    for (let i = 0; i < particleCount; i++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        
+                        const size = Math.random() * 5 + 2;
+                        particle.style.width = `${size}px`;
+                        particle.style.height = `${size}px`;
+                        
+                        const x = e.clientX - button.getBoundingClientRect().left;
+                        const y = e.clientY - button.getBoundingClientRect().top;
+                        
+                        particle.style.left = `${x}px`;
+                        particle.style.top = `${y}px`;
+                        
+                        button.appendChild(particle);
+                        particles.push(particle);
+                        
+                        // Анимация частицы
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 100 + 50;
+                        const duration = Math.random() * 1000 + 500;
+                        
+                        particle.animate([
+                            { 
+                                transform: `translate(0, 0)`,
+                                opacity: 1
+                            },
+                            { 
+                                transform: `translate(${Math.cos(angle) * speed}px, ${Math.sin(angle) * speed}px)`,
+                                opacity: 0
+                            }
+                        ], {
+                            duration: duration,
+                            easing: 'ease-out'
+                        });
+                        
+                        // Удаление частицы после анимации
+                        setTimeout(() => {
+                            particle.remove();
+                        }, duration);
+                    }
+                });
+            });
+
+            // ========== ГЕНЕРАТОР ГРАДИЕНТОВ ==========
+            const gradientGenerator = document.getElementById('gradientGenerator');
+            const gradientPreview = document.getElementById('gradientPreview');
+            const generateGradientBtn = document.getElementById('generateGradientBtn');
+            const applyGradientBtn = document.getElementById('applyGradientBtn');
+            const gradientBtn = document.getElementById('gradientBtn');
+            
+            gradientBtn.addEventListener('click', function() {
+                gradientGenerator.style.display = gradientGenerator.style.display === 'block' ? 'none' : 'block';
+                if (gradientGenerator.style.display === 'block') {
+                    generateGradient();
+                }
+            });
+            
+            function generateGradient() {
+                const hue1 = Math.floor(Math.random() * 360);
+                const hue2 = (hue1 + Math.floor(Math.random() * 120) + 30) % 360;
+                
+                const angle = Math.floor(Math.random() * 360);
+                const gradient = `linear-gradient(${angle}deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
+                
+                gradientPreview.style.background = gradient;
+                gradientPreview.dataset.gradient = gradient;
+            }
+            
+            generateGradientBtn.addEventListener('click', generateGradient);
+            
+            applyGradientBtn.addEventListener('click', function() {
+                document.body.style.background = gradientPreview.dataset.gradient;
+                showNotification('Градиент применен к фону сайта!');
+                unlockAchievement('theme_changer');
+            });
+
+            // ========== ВИРТУАЛЬНОЕ ПИАНИНО ==========
+            const pianoContainer = document.getElementById('pianoContainer');
+            const piano = document.getElementById('piano');
+            const pianoBtn = document.getElementById('pianoBtn');
+            
+            // Создание клавиш пианино
+            const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+            const keyMap = { 'A': 0, 'S': 2, 'D': 4, 'F': 5, 'G': 7, 'H': 9, 'J': 11 };
+            
+            for (let i = 0; i < 12; i++) {
+                const key = document.createElement('div');
+                const isBlack = notes[i].includes('#');
+                
+                key.className = `piano-key ${isBlack ? 'black' : 'white'}`;
+                key.dataset.note = notes[i];
+                
+                key.addEventListener('mousedown', () => playNote(notes[i], key));
+                key.addEventListener('mouseup', () => stopNote(key));
+                key.addEventListener('mouseleave', () => stopNote(key));
+                
+                piano.appendChild(key);
+            }
+            
+            pianoBtn.addEventListener('click', function() {
+                pianoContainer.style.display = pianoContainer.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            function playNote(note, keyElement) {
+                // В реальном проекте здесь было бы воспроизведение звука
+                keyElement.classList.add('active');
+                unlockAchievement('piano_player');
+            }
+            
+            function stopNote(keyElement) {
+                keyElement.classList.remove('active');
+            }
+            
+            // Управление пианино с клавиатуры
+            document.addEventListener('keydown', function(e) {
+                if (pianoContainer.style.display !== 'block') return;
+                
+                const key = e.key.toUpperCase();
+                if (keyMap.hasOwnProperty(key)) {
+                    const noteIndex = keyMap[key];
+                    const note = notes[noteIndex];
+                    const keyElement = piano.children[noteIndex];
+                    
+                    playNote(note, keyElement);
+                }
+            });
+            
+            document.addEventListener('keyup', function(e) {
+                if (pianoContainer.style.display !== 'block') return;
+                
+                const key = e.key.toUpperCase();
+                if (keyMap.hasOwnProperty(key)) {
+                    const noteIndex = keyMap[key];
+                    const keyElement = piano.children[noteIndex];
+                    
+                    stopNote(keyElement);
+                }
+            });
+
+            // ========== EASTER EGGS ==========
+            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+            let konamiIndex = 0;
+            
+            document.addEventListener('keydown', function(e) {
+                // Проверка кода Konami
+                if (e.code === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    
+                    if (konamiIndex === konamiCode.length) {
+                        // Активация Easter Egg
+                        document.body.style.animation = 'rainbow 5s infinite';
+                        showNotification('Секретный код активирован! Радужный режим включен.');
+                        konamiIndex = 0;
+                        
+                        // Добавляем CSS анимацию радуги
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            @keyframes rainbow {
+                                0% { filter: hue-rotate(0deg); }
+                                100% { filter: hue-rotate(360deg); }
+                            }
+                        `;
+                        document.head.appendChild(style);
+                        
+                        setTimeout(() => {
+                            document.body.style.animation = '';
+                            showNotification('Радужный режим выключен.');
+                        }, 10000);
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+                
+                // Другой Easter Egg - запуск конфетти при нажатии Ctrl+Shift+C
+                if (e.ctrlKey && e.shiftKey && e.code === 'KeyC') {
+                    showNotification('Конфетти! 🎉');
+                    unlockAchievement('explorer');
+                    
+                    // Создаем эффект конфетти
+                    for (let i = 0; i < 100; i++) {
+                        const confetti = document.createElement('div');
+                        confetti.style.position = 'fixed';
+                        confetti.style.width = '10px';
+                        confetti.style.height = '10px';
+                        confetti.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                        confetti.style.borderRadius = '50%';
+                        confetti.style.zIndex = '9999';
+                        confetti.style.left = `${Math.random() * 100}vw`;
+                        confetti.style.top = '-10px';
+                        
+                        document.body.appendChild(confetti);
+                        
+                        // Анимация падения
+                        const animation = confetti.animate([
+                            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                            { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                        ], {
+                            duration: Math.random() * 3000 + 2000,
+                            easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                        });
+                        
+                        animation.onfinish = () => confetti.remove();
+                    }
+                }
+            });
+
+            // ========== ТЕЛЕГРАМ ВИДЖЕТ ==========
+            const telegramWidget = document.getElementById('telegramWidget');
+            
+            telegramWidget.addEventListener('click', function() {
+                window.open('https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET', '_blank');
+            });
+
+            // ========== МОДАЛЬНОЕ ОКНО "О СЕБЕ" ==========
+            const aboutBtn = document.getElementById('aboutBtn');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const closeAboutBtn = document.getElementById('closeAboutBtn');
+            
+            aboutBtn.addEventListener('click', function() {
+                aboutModal.style.display = 'flex';
+            });
+            
+            closeAboutModal.addEventListener('click', function() {
+                aboutModal.style.display = 'none';
+            });
+            
+            closeAboutBtn.addEventListener('click', function() {
+                aboutModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === aboutModal) {
+                    aboutModal.style.display = 'none';
+                }
+            });
+
+            // ========== ОСТАЛЬНОЙ КОД ==========
             // Управление музыкой
             const music = document.getElementById('backgroundMusic');
             const musicControl = document.getElementById('musicControl');
@@ -784,6 +1350,7 @@
                         isMusicPlaying = true;
                         musicControl.classList.remove('muted');
                         musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        unlockAchievement('music_player');
                     }).catch(error => {
                         // Автовоспроизведение заблокировано
                         console.log('Автовоспроизведение заблокировано: ', error);
@@ -810,6 +1377,7 @@
                     });
                     musicControl.classList.remove('muted');
                     musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    unlockAchievement('music_player');
                 }
                 isMusicPlaying = !isMusicPlaying;
             });
@@ -828,6 +1396,7 @@
                 // Сохраняем выбор темы в localStorage
                 localStorage.setItem('theme', newTheme);
                 showNotification(`Тема изменена на ${newTheme === 'dark' ? 'тёмную' : 'светлую'}`);
+                unlockAchievement('theme_changer');
             });
 
             // Проверяем сохраненную тему
@@ -842,6 +1411,7 @@
             const settingsModal = document.getElementById('settingsModal');
             const closeModal = document.getElementById('closeModal');
             const saveSettings = document.getElementById('saveSettings');
+            const cursorToggle = document.getElementById('cursorToggle');
 
             settingsBtn.addEventListener('click', function() {
                 settingsModal.style.display = 'flex';
@@ -861,6 +1431,7 @@
                 const username = document.getElementById('username').value;
                 const volume = document.getElementById('musicVolume').value;
                 const eventDate = document.getElementById('eventDate').value;
+                const cursorEnabled = cursorToggle.checked;
                 
                 if (username) {
                     localStorage.setItem('username', username);
@@ -875,6 +1446,20 @@
                     localStorage.setItem('eventDate', eventDate);
                     setupCountdown();
                     showNotification('Дата события обновлена!');
+                }
+                
+                // Сохранение настройки курсора
+                localStorage.setItem('customCursor', cursorEnabled);
+                customCursorEnabled = cursorEnabled;
+                
+                if (cursorEnabled) {
+                    cursor.style.display = 'block';
+                    cursorFollower.style.display = 'block';
+                    document.body.style.cursor = 'none';
+                } else {
+                    cursor.style.display = 'none';
+                    cursorFollower.style.display = 'none';
+                    document.body.style.cursor = 'auto';
                 }
                 
                 settingsModal.style.display = 'none';
@@ -899,6 +1484,9 @@
             if (savedEventDate) {
                 document.getElementById('eventDate').value = savedEventDate;
             }
+            
+            // Загрузка настройки курсора
+            cursorToggle.checked = customCursorEnabled;
 
             // Уведомления
             const notifyBtn = document.getElementById('notifyBtn');
@@ -997,13 +1585,15 @@
                     <p>Дата и время загрузки: ${new Date().toLocaleString()}</p>
                     <h3>Особенности реализации:</h3>
                     <ul>
-                        <li>Удалена мини-игра в крестики-нолики</li>
-                        <li>Добавлена навигация между страницами</li>
-                        <li>Исправлена работа фоновой музыки</li>
-                        <li>Сохраняется состояние при переключении страниц</li>
-                        <li>Добавлены новые функции вместо ползунка прогресса</li>
-                        <li>Улучшена система уведомлений</li>
+                        <li>Добавлена анимированная визитка с username</li>
+                        <li>Реализован кастомный курсор с эффектами</li>
+                        <li>Добавлена система достижений</li>
+                        <li>Создан генератор градиентов</li>
+                        <li>Добавлено виртуальное пианино</li>
+                        <li>Реализованы Easter Eggs</li>
+                        <li>Добавлен Telegram-виджет</li>
                     </ul>
+                    <p>Связь с создателем: <a href="https://t.me/HEEEEEEEEEEEEEEEEEEEEEEEET" style="color: var(--primary-accent);">@HEEEEEEEEEEEEEEEEEEEEEEEET</a></p>
                 `;
                 
                 contentContainer.innerHTML = demoContent;
@@ -1039,8 +1629,6 @@
                 }
             });
 
-            // НОВЫЕ ФУНКЦИИ
-            
             // 1. Мини-игра "Угадай число"
             const gameContainer = document.getElementById('gameContainer');
             const gameInput = document.getElementById('gameInput');
@@ -1066,6 +1654,8 @@
                 // Скрываем другие элементы
                 document.getElementById('weatherWidget').style.display = 'none';
                 document.getElementById('dailyQuote').style.display = 'none';
+                document.getElementById('pianoContainer').style.display = 'none';
+                document.getElementById('gradientGenerator').style.display = 'none';
                 
                 // Показываем игру
                 gameContainer.style.display = gameContainer.style.display === 'block' ? 'none' : 'block';
@@ -1092,6 +1682,7 @@
                     gameInput.disabled = true;
                     guessBtn.disabled = true;
                     restartGame.style.display = 'block';
+                    unlockAchievement('game_winner');
                 } else if (userGuess < randomNumber) {
                     gameFeedback.textContent = 'Слишком маленькое число. Попробуйте еще раз!';
                     gameFeedback.style.color = '#ff9800';
@@ -1145,6 +1736,8 @@
                 // Скрываем другие элементы
                 document.getElementById('weatherWidget').style.display = 'none';
                 document.getElementById('gameContainer').style.display = 'none';
+                document.getElementById('pianoContainer').style.display = 'none';
+                document.getElementById('gradientGenerator').style.display = 'none';
                 
                 // Показываем цитату
                 dailyQuote.style.display = dailyQuote.style.display === 'block' ? 'none' : 'block';
@@ -1167,6 +1760,8 @@
                 // Скрываем другие элементы
                 document.getElementById('gameContainer').style.display = 'none';
                 document.getElementById('dailyQuote').style.display = 'none';
+                document.getElementById('pianoContainer').style.display = 'none';
+                document.getElementById('gradientGenerator').style.display = 'none';
                 
                 // Показываем виджет погоды
                 weatherWidget.style.display = weatherWidget.style.display === 'block' ? 'none' : 'block';
