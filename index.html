@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт</title>
+    <title>Мой сайт с музыкой</title>
     <style>
         :root {
             --main-bg-color: #0a0a0a;
@@ -125,6 +125,42 @@
             border-top: 1px solid rgba(138, 43, 226, 0.3);
         }
 
+        /* Кнопка управления музыкой */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(138, 43, 226, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .music-control:hover {
+            background: rgba(138, 43, 226, 0.9);
+            transform: scale(1.1);
+        }
+
+        .music-control.muted {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .music-control.muted i {
+            color: #ff4444;
+        }
+
+        .music-control i {
+            color: white;
+            font-size: 20px;
+        }
+
         @media (max-width: 768px) {
             .logo {
                 font-size: 2rem;
@@ -137,6 +173,13 @@
             .feature-grid {
                 grid-template-columns: 1fr;
             }
+
+            .music-control {
+                bottom: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+            }
         }
 
         @keyframes spin {
@@ -144,8 +187,22 @@
             100% { transform: rotate(360deg); }
         }
     </style>
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Аудио элемент -->
+    <audio id="backgroundMusic" loop>
+        <!-- ЗАМЕНИТЕ СЛЕДУЮЩУЮ СТРОКУ НА ПУТЬ К ВАШЕМУ ФАЙЛУ В РЕПОЗИТОРИИ -->
+        <source src="music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <!-- Кнопка управления музыкой -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-volume-up"></i>
+    </div>
+
     <header class="header">
         <nav class="nav container">
             <div class="logo">МойСайт</div>
@@ -293,6 +350,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.style.overflow = 'auto';
                 // Восстанавливаем все ссылки после ввода пароля
                 restoreLinks();
+                
+                // Запускаем музыку после ввода пароля
+                try {
+                    const music = document.getElementById('backgroundMusic');
+                    music.volume = 0.5; // Устанавливаем громкость на 50%
+                    music.play().catch(e => {
+                        console.log("Автовоспроизведение заблокировано: ", e);
+                    });
+                } catch (e) {
+                    console.error("Ошибка воспроизведения музыки: ", e);
+                }
             }, 2000);
 
         } else {
@@ -394,6 +462,43 @@ document.getElementById('startBtn').addEventListener('click', function(e) {
             window.location.href = 'content.html';
         }, 1500);
     }
+});
+
+// Управление музыкой
+document.addEventListener('DOMContentLoaded', function() {
+    const musicControl = document.getElementById('musicControl');
+    const music = document.getElementById('backgroundMusic');
+    const musicIcon = musicControl.querySelector('i');
+    
+    let isMuted = false;
+    
+    musicControl.addEventListener('click', function() {
+        if (isMuted) {
+            // Включаем музыку
+            music.play().catch(e => {
+                console.log("Ошибка воспроизведения: ", e);
+            });
+            musicIcon.className = 'fas fa-volume-up';
+            musicControl.classList.remove('muted');
+        } else {
+            // Выключаем музыку
+            music.pause();
+            musicIcon.className = 'fas fa-volume-mute';
+            musicControl.classList.add('muted');
+        }
+        
+        isMuted = !isMuted;
+    });
+    
+    // Автозапуск после взаимодействия с пользователем
+    document.body.addEventListener('click', function initMusic() {
+        if (music.paused && !isMuted) {
+            music.play().catch(e => {
+                console.log("Автовоспроизведение заблокировано: ", e);
+            });
+        }
+        document.body.removeEventListener('click', initMusic);
+    }, { once: true });
 });
 </script>
 </body>
