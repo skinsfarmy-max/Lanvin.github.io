@@ -332,7 +332,7 @@
             border-radius: 5px;
             border: 1px solid var(--border-color);
             background: var(--card-bg);
-            color: var(--text-primary);
+            color: var(--text-primary;
         }
 
         .settings-btn {
@@ -372,74 +372,30 @@
             transform: translateX(0);
         }
 
-        /* Мини-игра */
-        .mini-game {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: var(--secondary-bg-color);
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            width: 250px;
-            border: 1px solid var(--border-color);
+        /* Страница контента */
+        .content-page {
+            display: none;
+            padding: 2rem 0;
+            min-height: 100vh;
         }
 
-        .game-title {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-accent);
-            text-align: center;
-        }
-
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-        }
-
-        .game-cell {
-            aspect-ratio: 1;
+        .content-container {
             background: var(--card-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background 0.3s ease;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin: 2rem auto;
+            max-width: 800px;
         }
 
-        .game-cell:hover {
-            background: rgba(138, 43, 226, 0.2);
-        }
-
-        .game-cell.x {
-            color: var(--primary-accent);
-        }
-
-        .game-cell.o {
-            color: var(--secondary-accent);
-        }
-
-        .game-status {
-            margin-top: 0.5rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .game-reset {
-            display: block;
-            margin: 0.5rem auto 0;
-            padding: 0.3rem 0.8rem;
+        .back-btn {
+            margin-bottom: 1rem;
             background: var(--primary-accent);
             color: white;
             border: none;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.8rem;
         }
 
         /* Анимации */
@@ -485,12 +441,6 @@
             .countdown-number {
                 font-size: 2rem;
             }
-
-            .mini-game {
-                bottom: 70px;
-                right: 15px;
-                width: 200px;
-            }
         }
     </style>
     <!-- Font Awesome для иконок -->
@@ -513,98 +463,95 @@
     <!-- Частицы фона -->
     <div id="particles-js"></div>
 
-    <!-- Мини-игра -->
-    <div class="mini-game" id="miniGame">
-        <div class="game-title">Крестики-нолики</div>
-        <div class="game-grid" id="gameGrid">
-            <div class="game-cell" data-cell-index="0"></div>
-            <div class="game-cell" data-cell-index="1"></div>
-            <div class="game-cell" data-cell-index="2"></div>
-            <div class="game-cell" data-cell-index="3"></div>
-            <div class="game-cell" data-cell-index="4"></div>
-            <div class="game-cell" data-cell-index="5"></div>
-            <div class="game-cell" data-cell-index="6"></div>
-            <div class="game-cell" data-cell-index="7"></div>
-            <div class="game-cell" data-cell-index="8"></div>
-        </div>
-        <div class="game-status" id="gameStatus">Ход: X</div>
-        <button class="game-reset" id="gameReset">Новая игра</button>
+    <!-- Главная страница -->
+    <div id="mainPage">
+        <header class="header">
+            <nav class="nav container">
+                <div class="logo">МойСайт</div>
+                <div class="nav-controls">
+                    <button class="control-btn" id="themeToggle" title="Сменить тему">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="control-btn" id="settingsBtn" title="Настройки">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button class="control-btn" id="notifyBtn" title="Тест уведомления">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="container">
+                <h1>Добро пожаловать</h1>
+                <p>Современный сайт с адаптивным дизайном и интерактивными функциями</p>
+                <button class="btn" id="startBtn">Начать</button>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Наши возможности</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Адаптивный дизайн</h3>
+                        <p>Сайт отлично выглядит на любом устройстве - от смартфона до десктопа.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Интерактивность</h3>
+                        <p>Темная и светлая тема, анимированный фон и другие интерактивные элементы.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Музыкальное сопровождение</h3>
+                        <p>Фоновая музыка создает приятную атмосферу для посещения сайта.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="countdown">
+            <div class="container">
+                <h2 class="countdown-title">До нового события осталось:</h2>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">дней</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">часов</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">минут</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">секунд</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <p>© 2023 МойСайт. Все права защищены.</p>
+            </div>
+        </footer>
     </div>
 
-    <header class="header">
-        <nav class="nav container">
-            <div class="logo">МойСайт</div>
-            <div class="nav-controls">
-                <button class="control-btn" id="themeToggle" title="Сменить тему">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="control-btn" id="settingsBtn" title="Настройки">
-                    <i class="fas fa-cog"></i>
-                </button>
-                <button class="control-btn" id="notifyBtn" title="Тест уведомления">
-                    <i class="fas fa-bell"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero">
+    <!-- Страница с контентом -->
+    <div id="contentPage" class="content-page">
         <div class="container">
-            <h1>Добро пожаловать</h1>
-            <p>Современный сайт с адаптивным дизайном и интерактивными функциями</p>
-            <a href="#features" class="btn" id="startBtn">Начать</a>
-        </div>
-    </section>
-
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Наши возможности</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Адаптивный дизайн</h3>
-                    <p>Сайт отлично выглядит на любом устройстве - от смартфона до десктопа.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Интерактивность</h3>
-                    <p>Темная и светлая тема, анимированный фон и другие интерактивные элементы.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Музыкальное сопровождение</h3>
-                    <p>Фоновая музыка создает приятную атмосферу для посещения сайта.</p>
-                </div>
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i> Назад
+            </button>
+            <div class="content-container" id="contentContainer">
+                <h2>Загрузка контента...</h2>
             </div>
         </div>
-    </section>
-
-    <section class="countdown">
-        <div class="container">
-            <h2 class="countdown-title">До нового события осталось:</h2>
-            <div class="countdown-container">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">дней</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">часов</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">минут</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">секунд</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2023 МойСайт. Все права защищены.</p>
-        </div>
-    </footer>
+    </div>
 
     <!-- Модальное окно -->
     <div class="modal" id="settingsModal">
@@ -677,8 +624,32 @@
             const musicControl = document.getElementById('musicControl');
             let isMusicPlaying = false;
 
-            // Попытка автоматического воспроизведения с обработкой ошибок
+            // Установка громкости по умолчанию
             music.volume = 0.5;
+            
+            // Попытка автоматического воспроизведения
+            function tryAutoPlay() {
+                const playPromise = music.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Автовоспроизведение успешно
+                        isMusicPlaying = true;
+                        musicControl.classList.remove('muted');
+                        musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    }).catch(error => {
+                        // Автовоспроизведение заблокировано
+                        console.log('Автовоспроизведение заблокировано: ', error);
+                        isMusicPlaying = false;
+                        musicControl.classList.add('muted');
+                        musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                        showNotification('Нажмите на значок музыки для воспроизведения');
+                    });
+                }
+            }
+            
+            // Запускаем попытку автовоспроизведения после загрузки страницы
+            tryAutoPlay();
             
             musicControl.addEventListener('click', function() {
                 if (isMusicPlaying) {
@@ -687,8 +658,8 @@
                     musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
                 } else {
                     music.play().catch(error => {
-                        console.log('Автовоспроизведение заблокировано: ', error);
-                        showNotification('Нажмите для воспроизведения музыки');
+                        console.log('Ошибка воспроизведения: ', error);
+                        showNotification('Не удалось воспроизвести музыку');
                     });
                     musicControl.classList.remove('muted');
                     musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
@@ -832,81 +803,60 @@
             
             setupCountdown();
 
-            // Мини-игра (крестики-нолики)
-            const gameGrid = document.getElementById('gameGrid');
-            const gameCells = document.querySelectorAll('.game-cell');
-            const gameStatus = document.getElementById('gameStatus');
-            const gameReset = document.getElementById('gameReset');
-            
-            let currentPlayer = 'X';
-            let gameState = ['', '', '', '', '', '', '', '', ''];
-            let gameActive = true;
-            
-            const winningConditions = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-                [0, 4, 8], [2, 4, 6] // diagonals
-            ];
-            
-            function handleCellClick(e) {
-                const clickedCell = e.target;
-                const cellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+            // Переход на страницу с контентом
+            const startBtn = document.getElementById('startBtn');
+            const backBtn = document.getElementById('backBtn');
+            const mainPage = document.getElementById('mainPage');
+            const contentPage = document.getElementById('contentPage');
+            const contentContainer = document.getElementById('contentContainer');
+
+            startBtn.addEventListener('click', function() {
+                // Скрываем главную страницу и показываем страницу с контентом
+                mainPage.style.display = 'none';
+                contentPage.style.display = 'block';
                 
-                if (gameState[cellIndex] !== '' || !gameActive) return;
+                // Загружаем контент из файла
+                loadContent();
+            });
+
+            backBtn.addEventListener('click', function() {
+                // Возвращаемся на главную страницу
+                contentPage.style.display = 'none';
+                mainPage.style.display = 'block';
+            });
+
+            function loadContent() {
+                // В реальном проекте здесь был бы fetch запрос к content.html
+                // Для демонстрации используем заглушку
                 
-                gameState[cellIndex] = currentPlayer;
-                clickedCell.textContent = currentPlayer;
-                clickedCell.classList.add(currentPlayer.toLowerCase());
+                const demoContent = `
+                    <h2>Добро пожаловать на вторую страницу!</h2>
+                    <p>Это демонстрационный контент, который заменяет загрузку из файла content.html.</p>
+                    <p>В реальном проекте здесь будет загружаться содержимое из внешнего файла.</p>
+                    <p>Дата и время загрузки: ${new Date().toLocaleString()}</p>
+                    <h3>Особенности реализации:</h3>
+                    <ul>
+                        <li>Удалена мини-игра в крестики-нолики</li>
+                        <li>Добавлена навигация между страницами</li>
+                        <li>Исправлена работа фоновой музыки</li>
+                        <li>Сохраняется состояние при переключении страниц</li>
+                    </ul>
+                `;
                 
-                checkResult();
+                contentContainer.innerHTML = demoContent;
+                
+                // В реальном проекте вместо demoContent был бы код:
+                /*
+                fetch('content.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        contentContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        contentContainer.innerHTML = '<p>Ошибка загрузки контента: ' + error + '</p>';
+                    });
+                */
             }
-            
-            function checkResult() {
-                let roundWon = false;
-                
-                for (let i = 0; i < winningConditions.length; i++) {
-                    const [a, b, c] = winningConditions[i];
-                    if (gameState[a] === '' || gameState[b] === '' || gameState[c] === '') continue;
-                    
-                    if (gameState[a] === gameState[b] && gameState[b] === gameState[c]) {
-                        roundWon = true;
-                        break;
-                    }
-                }
-                
-                if (roundWon) {
-                    gameStatus.textContent = `Игрок ${currentPlayer} победил!`;
-                    gameActive = false;
-                    showNotification(`Игрок ${currentPlayer} победил в крестики-нолики!`);
-                    return;
-                }
-                
-                const roundDraw = !gameState.includes('');
-                if (roundDraw) {
-                    gameStatus.textContent = 'Ничья!';
-                    gameActive = false;
-                    showNotification('Ничья в крестики-нолики!');
-                    return;
-                }
-                
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                gameStatus.textContent = `Ход: ${currentPlayer}`;
-            }
-            
-            function resetGame() {
-                currentPlayer = 'X';
-                gameState = ['', '', '', '', '', '', '', '', ''];
-                gameActive = true;
-                gameStatus.textContent = `Ход: ${currentPlayer}`;
-                
-                gameCells.forEach(cell => {
-                    cell.textContent = '';
-                    cell.classList.remove('x', 'o');
-                });
-            }
-            
-            gameCells.forEach(cell => cell.addEventListener('click', handleCellClick));
-            gameReset.addEventListener('click', resetGame);
         });
     </script>
 </body>
